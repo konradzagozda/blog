@@ -1,4 +1,4 @@
-import { Article, LinkedIn, Terminal, X } from "@mui/icons-material";
+import { Article, Email, LinkedIn, Terminal, X } from "@mui/icons-material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -6,7 +6,14 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { type ReactElement } from "react";
 
 const generateTimelineItems = () => {
@@ -74,36 +81,74 @@ const generateTimelineItems = () => {
 const timelineItems = generateTimelineItems();
 
 export function App(): ReactElement {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <>
       <AppBar
         position="static"
         elevation={0}
         sx={{
-          bgcolor: "grey.100",
-          mb: 2,
-          color: "text.primary",
+          bgcolor: "grey.50",
+          borderBottom: 1,
+          borderColor: "grey.200",
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ py: 2 }}>
           <div>
             <Typography
-              variant="h5"
+              variant="h4"
               component="h1"
-              sx={{ flexGrow: 1, color: "text.primary" }}
+              sx={{
+                color: "text.primary",
+                fontWeight: 500,
+                letterSpacing: -0.5,
+              }}
             >
               Konrad Zagozda
             </Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              public archive
+            <Typography
+              variant="subtitle1"
+              sx={{
+                color: "text.secondary",
+                fontWeight: 400,
+                letterSpacing: 0.2,
+                mt: 0.5,
+              }}
+            >
+              archive
             </Typography>
           </div>
           <div style={{ flexGrow: 1 }} />
           <IconButton
+            href="mailto:zagozdakonrad@gmail.com"
+            size="large"
+            sx={{
+              ml: 1,
+              color: "grey.700",
+              "&:hover": {
+                color: "primary.main",
+                bgcolor: "grey.100",
+              },
+            }}
+            aria-label="Email"
+          >
+            <Email />
+          </IconButton>
+          <IconButton
             href="https://x.com/konrad_zagozda"
             target="_blank"
             rel="noreferrer"
-            color="primary"
+            size="large"
+            sx={{
+              ml: 1,
+              color: "grey.700",
+              "&:hover": {
+                color: "primary.main",
+                bgcolor: "grey.100",
+              },
+            }}
             aria-label="X profile"
           >
             <X />
@@ -112,18 +157,54 @@ export function App(): ReactElement {
             href="https://www.linkedin.com/in/zagozda/"
             target="_blank"
             rel="noreferrer"
-            color="primary"
+            size="large"
+            sx={{
+              ml: 1,
+              color: "grey.700",
+              "&:hover": {
+                color: "primary.main",
+                bgcolor: "grey.100",
+              },
+            }}
             aria-label="LinkedIn profile"
           >
             <LinkedIn />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Timeline position="alternate">
+      <Timeline
+        position={isMobile ? "right" : "alternate"}
+        sx={{
+          [`& .MuiTimelineItem-root`]: {
+            ...(isMobile && {
+              flexDirection: "row !important",
+              "&:before": {
+                display: "none",
+              },
+            }),
+            "&.MuiTimelineItem-alternateContent": {
+              "& .MuiTimelineContent-root": {
+                textAlign: "left",
+              },
+            },
+          },
+          [`& .MuiTimelineOppositeContent-root`]: {
+            ...(isMobile && {
+              flex: "0 0 90px",
+              position: "relative",
+              right: "16px",
+              textAlign: "left",
+            }),
+            textAlign: isMobile ? "left" : "right",
+          },
+        }}
+      >
         {timelineItems.map((item) => (
           <TimelineItem key={item.title}>
             <TimelineOppositeContent
-              sx={{ m: "auto 0" }}
+              sx={{
+                m: "auto 0",
+              }}
               variant="body2"
               color="text.secondary"
             >
