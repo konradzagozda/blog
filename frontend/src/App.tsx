@@ -1,4 +1,4 @@
-import { Article, Terminal } from "@mui/icons-material";
+import { Article, LinkedIn, Terminal, X } from "@mui/icons-material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -6,62 +6,147 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import Typography from "@mui/material/Typography";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import { type ReactElement } from "react";
 
-const timelineItems = [
-  {
-    date: "Mar 15, 2024",
-    title: "Building a Modern React App",
-    description:
-      "A comprehensive guide to building React applications with TypeScript and Tailwind CSS.",
-    type: "article" as const,
-  },
-  {
-    date: "Mar 10, 2024",
-    title: "Timeline Component",
-    description:
-      "A reusable timeline component built with React and Tailwind CSS.",
-    type: "project" as const,
-  },
-  {
-    date: "Mar 5, 2024",
-    title: "State Management in React",
-    description:
-      "Exploring different state management solutions in React applications.",
-    type: "article" as const,
-  },
-];
+const generateTimelineItems = () => {
+  const topics = [
+    "React",
+    "TypeScript",
+    "State Management",
+    "Testing",
+    "Performance",
+    "Security",
+    "Design Patterns",
+    "Architecture",
+    "CI/CD",
+    "DevOps",
+  ];
+
+  const articlePrefixes = [
+    "Guide to",
+    "Understanding",
+    "Deep Dive into",
+    "Best Practices for",
+    "Advanced",
+  ];
+
+  const projectPrefixes = [
+    "Building",
+    "Developing",
+    "Creating",
+    "Implementing",
+    "Optimizing",
+  ];
+
+  const items = [];
+  const startDate = new Date(2024, 0, 1); // Start from January 1, 2024
+
+  for (let i = 0; i < 50; i++) {
+    const isArticle = Math.random() > 0.3; // 70% chance of being an article
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+    const prefix = isArticle
+      ? articlePrefixes[Math.floor(Math.random() * articlePrefixes.length)]
+      : projectPrefixes[Math.floor(Math.random() * projectPrefixes.length)];
+
+    const itemDate = new Date(startDate);
+    itemDate.setDate(startDate.getDate() - i * 3); // Each item is 3 days apart
+
+    items.push({
+      date: itemDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+      title: `${prefix} ${topic}`,
+      description: isArticle
+        ? `A comprehensive exploration of ${topic.toLowerCase()} concepts and techniques in modern web development.`
+        : `A practical implementation showcasing ${topic.toLowerCase()} principles in action.`,
+      type: isArticle ? ("article" as const) : ("project" as const),
+    });
+  }
+
+  return items.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+};
+
+const timelineItems = generateTimelineItems();
 
 export function App(): ReactElement {
   return (
-    <Timeline position="alternate">
-      {timelineItems.map((item) => (
-        <TimelineItem key={item.title}>
-          <TimelineOppositeContent
-            sx={{ m: "auto 0" }}
-            variant="body2"
-            color="text.secondary"
-          >
-            {item.date}
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineConnector />
-            <TimelineDot
-              color={item.type === "article" ? "primary" : "secondary"}
+    <>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          bgcolor: "grey.100",
+          mb: 2,
+          color: "text.primary",
+        }}
+      >
+        <Toolbar>
+          <div>
+            <Typography
+              variant="h5"
+              component="h1"
+              sx={{ flexGrow: 1, color: "text.primary" }}
             >
-              {item.type === "article" ? <Article /> : <Terminal />}
-            </TimelineDot>
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ py: "12px", px: 2 }}>
-            <Typography variant="h6" component="span">
-              {item.title}
+              Konrad Zagozda
             </Typography>
-            <Typography>{item.description}</Typography>
-          </TimelineContent>
-        </TimelineItem>
-      ))}
-    </Timeline>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              public archive
+            </Typography>
+          </div>
+          <div style={{ flexGrow: 1 }} />
+          <IconButton
+            href="https://x.com/konrad_zagozda"
+            target="_blank"
+            rel="noreferrer"
+            color="primary"
+            aria-label="X profile"
+          >
+            <X />
+          </IconButton>
+          <IconButton
+            href="https://www.linkedin.com/in/zagozda/"
+            target="_blank"
+            rel="noreferrer"
+            color="primary"
+            aria-label="LinkedIn profile"
+          >
+            <LinkedIn />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Timeline position="alternate">
+        {timelineItems.map((item) => (
+          <TimelineItem key={item.title}>
+            <TimelineOppositeContent
+              sx={{ m: "auto 0" }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {item.date}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineConnector />
+              <TimelineDot
+                color={item.type === "article" ? "primary" : "secondary"}
+              >
+                {item.type === "article" ? <Article /> : <Terminal />}
+              </TimelineDot>
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent sx={{ py: "12px", px: 2 }}>
+              <Typography variant="h6" component="span">
+                {item.title}
+              </Typography>
+              <Typography>{item.description}</Typography>
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </Timeline>
+    </>
   );
 }
