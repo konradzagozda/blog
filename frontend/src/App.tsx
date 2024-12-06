@@ -9,7 +9,6 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import {
   AppBar,
   IconButton,
-  Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
@@ -262,29 +261,22 @@ export function App(): ReactElement {
         </div>
       </AppBar>
       <Timeline
-        position={isMobile ? "right" : "alternate"}
+        position="right"
         sx={{
           [`& .MuiTimelineItem-root`]: {
-            ...(isMobile && {
-              flexDirection: "row !important",
-              "&:before": {
-                display: "none",
-              },
-            }),
-            "&.MuiTimelineItem-alternateContent": {
-              "& .MuiTimelineContent-root": {
-                textAlign: "left",
-              },
-            },
+            minHeight: 100,
+            "&:before": {
+              display: "none"
+            }
           },
           [`& .MuiTimelineOppositeContent-root`]: {
-            ...(isMobile && {
-              flex: "0 0 90px",
-              position: "relative",
-              right: "16px",
-              textAlign: "left",
-            }),
-            textAlign: isMobile ? "left" : "right",
+            flex: "0 0 120px",
+            textAlign: "right",
+            paddingRight: 3,
+          },
+          [`& .MuiTimelineContent-root`]: {
+            flex: 2,
+            paddingRight: { xs: 2, sm: 6 },
           },
           px: { xs: 2, sm: 4 },
           maxWidth: 1000,
@@ -294,9 +286,6 @@ export function App(): ReactElement {
         {timelineItems.map((item) => (
           <TimelineItem key={item.title}>
             <TimelineOppositeContent
-              sx={{
-                m: "auto 0",
-              }}
               variant="body2"
               color="text.secondary"
             >
