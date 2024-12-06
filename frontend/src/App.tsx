@@ -273,10 +273,13 @@ export function App(): ReactElement {
             flex: "0 0 120px",
             textAlign: "right",
             paddingRight: 3,
+            margin: "auto 0",
+            alignSelf: "center",
           },
           [`& .MuiTimelineContent-root`]: {
             flex: 2,
             paddingRight: { xs: 2, sm: 6 },
+            paddingY: 2,
           },
           px: { xs: 2, sm: 4 },
           maxWidth: 1000,
@@ -288,6 +291,7 @@ export function App(): ReactElement {
             <TimelineOppositeContent
               variant="body2"
               color="text.secondary"
+              sx={{ pt: 0.5 }}
             >
               {item.date}
             </TimelineOppositeContent>
