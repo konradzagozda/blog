@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Box } from "@mui/material";
 import { type ReactElement } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Timeline } from "./components/Timeline";
 import { Article } from "./components/Article";
@@ -60,11 +61,29 @@ export const timelineItems = [
 export function App(): ReactElement {
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Timeline items={timelineItems} />} />
-        <Route path="/article/:id" element={<Article />} />
-      </Routes>
+      <Box sx={{ 
+        height: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column',
+        overflow: 'hidden', // Prevent body scroll
+      }}>
+        <Header />
+        <Box sx={{ 
+          flexGrow: 1,
+          overflow: 'auto',
+          // Hide scrollbar for WebKit browsers
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          },
+          // Hide scrollbar for Firefox
+          scrollbarWidth: 'none',
+        }}>
+          <Routes>
+            <Route path="/" element={<Timeline items={timelineItems} />} />
+            <Route path="/article/:id" element={<Article />} />
+          </Routes>
+        </Box>
+      </Box>
     </BrowserRouter>
   );
 }

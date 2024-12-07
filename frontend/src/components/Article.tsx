@@ -1,14 +1,14 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { Typography, Container, IconButton, Box } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 import { type ReactElement } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { timelineItems } from "../App";
 import { slugify } from "../utils/slugify";
 
 export function Article(): ReactElement {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const article = timelineItems.find(
     (item) => item.type === "article" && slugify(item.title) === (id || "")
   );
@@ -22,29 +22,34 @@ export function Article(): ReactElement {
   }
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      justifyContent: 'center',
-      position: 'relative',
-      mt: 4,
-      px: 2, // Add padding for mobile
-    }}>
-      <IconButton 
-        onClick={() => navigate("/")} 
-        sx={{ 
-          position: { xs: 'static', md: 'absolute' },
-          left: { md: '24px' },
-          top: { md: '0' },
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        position: "relative",
+        mt: 4,
+        px: 2, // Add padding for mobile
+      }}
+    >
+      <IconButton
+        onClick={() => navigate("/")}
+        sx={{
+          position: { xs: "static", md: "absolute" },
+          left: { md: "24px" },
+          top: { md: "0" },
           mb: { xs: 2, md: 0 },
           mr: { xs: 1, md: 0 },
         }}
       >
         <ArrowBack />
       </IconButton>
-      
-      <Container maxWidth="md" sx={{ 
-        maxWidth: { xs: '100%', md: '800px' } 
-      }}>
+
+      <Container
+        maxWidth="md"
+        sx={{
+          maxWidth: { xs: "100%", md: "800px" },
+        }}
+      >
         <Typography variant="h4" gutterBottom>
           {article.title}
         </Typography>
@@ -57,4 +62,4 @@ export function Article(): ReactElement {
       </Container>
     </Box>
   );
-} 
+}

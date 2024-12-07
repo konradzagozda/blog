@@ -66,20 +66,20 @@ export function Timeline({ items }: TimelineProps): ReactElement {
 
   const handleItemClick = (item: TimelineItemData) => {
     if (item.type === "project" && item.link) {
-      window.open(item.link, '_blank', 'noopener,noreferrer');
+      window.open(item.link, "_blank", "noopener,noreferrer");
     } else if (item.type === "article") {
       navigate(`/article/${slugify(item.title)}`);
     }
   };
 
   const getItemSx = (item: TimelineItemData) => {
-    if (item.type === "project" && item.link || item.type === "article") {
+    if ((item.type === "project" && item.link) || item.type === "article") {
       return {
-        cursor: 'pointer',
+        cursor: "pointer",
         borderRadius: 1,
-        transition: 'background-color 0.2s ease-in-out',
-        '&:hover': {
-          bgcolor: 'rgba(0, 0, 0, 0.03)',
+        transition: "background-color 0.2s ease-in-out",
+        "&:hover": {
+          bgcolor: "rgba(0, 0, 0, 0.03)",
         },
       };
     }
@@ -98,7 +98,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         }}
       >
         {items.map((item, index) => (
-          <TimelineItem 
+          <TimelineItem
             key={`${item.title}-${index}-desktop`}
             sx={getItemSx(item)}
             onClick={() => handleItemClick(item)}
