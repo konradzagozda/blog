@@ -5,6 +5,7 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Box,
 } from "@mui/material";
 import { type ReactElement } from "react";
 
@@ -101,23 +102,32 @@ export function Header(): ReactElement {
             padding: "0 24px",
           }}
         >
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                color: "text.secondary",
+              }}
+            >
+              Hello! 👋 I&apos;m
+            </Typography>
+            
+            <Typography
+              variant="h1"
+              component="h1"
+              sx={{
+                color: "text.primary",
+                fontSize: { xs: "1.5rem", sm: "1.75rem" },
+                display: 'inline',
+                mt: -1.1,
+              }}
+            >
+              Konrad Zagozda
+            </Typography>
+          </Box>
+
           <Typography
-            variant="h4"
-            component="h1"
-            sx={{
-              color: "text.primary",
-              fontWeight: 500,
-              fontSize: { xs: "1.5rem", sm: "1.75rem" },
-              mb: 1,
-              wordBreak: "break-word",
-              maxWidth: "600px",
-              mx: "auto",
-            }}
-          >
-            Konrad Zagozda
-          </Typography>
-          <Typography
-            variant="body2"
+            variant="body1"
             sx={{
               color: "text.secondary",
               mb: isMobile ? 2 : 0,
@@ -126,15 +136,7 @@ export function Header(): ReactElement {
               wordBreak: "break-word",
             }}
           >
-            {isMobile ? (
-              <>
-                Hello!👋 Here, I explore things,
-                <br />
-                sharing thoughts along the way.
-              </>
-            ) : (
-              "Hello!👋 Here, I explore things, sharing thoughts along the way."
-            )}
+            Here, I explore things, sharing thoughts along the way.
           </Typography>
 
           {isMobile && (

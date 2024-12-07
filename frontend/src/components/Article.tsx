@@ -11,7 +11,6 @@ import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typesc
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 
-// Register languages you want to use
 SyntaxHighlighter.registerLanguage('typescript', typescript);
 SyntaxHighlighter.registerLanguage('javascript', javascript);
 SyntaxHighlighter.registerLanguage('bash', bash);
@@ -20,13 +19,23 @@ interface ArticleProps {
   article: ArticleItem;
 }
 
+const CODE_FONTS = "'Source Code Pro', 'JetBrains Mono', 'Fira Code', monospace";
+
 export function Article({ article }: ArticleProps): ReactElement {
   const navigate = useNavigate();
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", position: "relative", mt: 4, px: { xs: 0, md: 2 } }}>
       <Container maxWidth="md" sx={{ maxWidth: { xs: "100%", md: "800px" } }}>
-        <Typography variant="h4" gutterBottom sx={{ px: { xs: 2, md: 0 }, textAlign: "center" }}>
+        <Typography 
+          variant="h1" 
+          component="h1"
+          gutterBottom 
+          sx={{ 
+            px: { xs: 2, md: 0 }, 
+            textAlign: "center" 
+          }}
+        >
           {article.title}
         </Typography>
 
@@ -43,6 +52,36 @@ export function Article({ article }: ArticleProps): ReactElement {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              h1: ({ children }) => (
+                <Typography variant="h2" component="h2" gutterBottom>
+                  {children}
+                </Typography>
+              ),
+              h2: ({ children }) => (
+                <Typography variant="h3" component="h3" gutterBottom>
+                  {children}
+                </Typography>
+              ),
+              h3: ({ children }) => (
+                <Typography variant="h4" component="h4" gutterBottom>
+                  {children}
+                </Typography>
+              ),
+              h4: ({ children }) => (
+                <Typography variant="h5" component="h5" gutterBottom>
+                  {children}
+                </Typography>
+              ),
+              h5: ({ children }) => (
+                <Typography variant="h6" component="h6" gutterBottom>
+                  {children}
+                </Typography>
+              ),
+              h6: ({ children }) => (
+                <Typography variant="h6" component="h6" gutterBottom>
+                  {children}
+                </Typography>
+              ),
               code({inline, className, children}) {
                 const match = /language-(\w+)/.exec(className || '');
                 const lang = match ? match[1] : '';
@@ -56,9 +95,12 @@ export function Article({ article }: ArticleProps): ReactElement {
                       customStyle={{
                         margin: '1.5em 0',
                         borderRadius: '8px',
-                        padding: '1em',
-                        fontSize: '14px',
-                        fontFamily: '"JetBrains Mono", Consolas, Monaco, monospace',
+                        fontFamily: CODE_FONTS,
+                      }}
+                      codeTagProps={{
+                        style: {
+                          fontFamily: CODE_FONTS,
+                        }
                       }}
                     >
                       {String(children).replace(/\n$/, '')}
