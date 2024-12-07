@@ -45,7 +45,6 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       case "celebration":
         return {
           bgcolor: "#ffd700", // Golden yellow for celebration
-          p: 1,
           "& svg": { color: "#000" }, // Black icon
         };
       case "project":
@@ -155,7 +154,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 {item.title}
               </Typography>
               {item.description && (
-                <Typography 
+                <Typography
                   color="text.secondary"
                   sx={{
                     overflowWrap: "break-word",
@@ -192,10 +191,10 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               sx={{
                 m: "auto 0",
                 ...(index === 0 && {
-                  mt: 1.5,
+                  mt: -3,
                 }),
                 ...(index === items.length - 1 && {
-                  mb: 2.2,
+                  mt: -2.5,
                 }),
                 transform: "rotate(-40deg)",
                 transformOrigin: "right center",
@@ -248,7 +247,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 {item.title}
               </Typography>
               {item.description && (
-                <Typography 
+                <Typography
                   color="text.secondary"
                   sx={{
                     overflowWrap: "break-word",
