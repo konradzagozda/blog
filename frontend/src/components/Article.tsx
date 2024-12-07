@@ -10,7 +10,7 @@ export function Article(): ReactElement {
   const navigate = useNavigate();
 
   const article = timelineItems.find(
-    (item) => item.type === "article" && slugify(item.title) === (id || "")
+    (item) => item.type === "article" && slugify(item.title) === (id ?? "")
   );
 
   if (!article || article.type !== "article") {
@@ -32,7 +32,7 @@ export function Article(): ReactElement {
       }}
     >
       <IconButton
-        onClick={() => navigate("/")}
+        onClick={() => void navigate("/")}
         sx={{
           position: { xs: "static", md: "absolute" },
           left: { md: "24px" },

@@ -68,7 +68,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
     if (item.type === "project" && item.link) {
       window.open(item.link, "_blank", "noopener,noreferrer");
     } else if (item.type === "article") {
-      navigate(`/article/${slugify(item.title)}`);
+      void navigate(`/article/${slugify(item.title)}`);
     }
   };
 
