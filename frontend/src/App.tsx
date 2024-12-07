@@ -1,6 +1,6 @@
 import { type ReactElement } from "react";
-import { Timeline } from "./components/Timeline";
 import { Header } from "./components/Header";
+import { Timeline } from "./components/Timeline";
 
 const timelineItems = [
   {
@@ -15,7 +15,7 @@ const timelineItems = [
     title: "Understanding DevOps",
     description:
       "A comprehensive exploration of devops concepts and techniques in modern web development.",
-    type: "article" as const,
+    type: "project" as const,
   },
   {
     date: "Dec 28, 2023",
