@@ -15,7 +15,84 @@ export const timelineItems = [
     content: `TypeScript's type system is incredibly powerful, offering features that go well beyond simple type annotations. 
       In this article, we explore advanced patterns like mapped types for transforming existing types, conditional types for 
       type-level programming, and template literal types for string manipulation at the type level. We'll see how these 
-      patterns can make our code more type-safe and maintainable.`,
+      patterns can make our code more type-safe and maintainable.
+
+      Let's start with mapped types, one of TypeScript's most powerful features. Mapped types allow us to create new types
+      based on existing ones, transforming each property according to specific rules. For example, you might want to create
+      a readonly version of an interface, or make all properties optional. Consider this pattern:
+      
+      type ReadOnly<T> = { readonly [P in keyof T]: T[P] };
+      
+      This simple yet powerful pattern forms the basis for many utility types in TypeScript. But we can go further by combining
+      mapped types with conditional types to create even more sophisticated type transformations.
+
+      Conditional types introduce a new level of expressiveness to TypeScript's type system. They allow us to select types
+      based on conditions, similar to how we use if statements in regular programming. One common pattern is to use conditional
+      types for type inference:
+
+      type InferReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+      Template literal types are another game-changer, allowing us to manipulate string types with unprecedented precision.
+      They enable us to create types that represent specific string patterns, validate string formats at compile time, and
+      even generate new string types based on existing ones:
+
+      type EventName<T extends string> = \`on\${Capitalize<T>}Click\`;
+
+      When it comes to practical applications, these patterns shine in real-world scenarios. Consider building a type-safe
+      API client where you want to ensure that all endpoint definitions match your backend exactly. You can use a combination
+      of mapped types and template literals to create a type-safe router:
+
+      type APIRoutes = {
+        users: '/api/users';
+        posts: '/api/posts';
+      };
+      
+      type APIEndpoints = {
+        [K in keyof APIRoutes]: {
+          get: () => Promise<any>;
+          post: (data: any) => Promise<any>;
+        }
+      };
+
+      Another powerful application is in state management, where we can use conditional types to ensure that our reducers
+      handle all possible action types correctly. This pattern has become increasingly popular in Redux and other state
+      management solutions:
+
+      type ActionHandler<State, Action> = Action extends { type: infer T }
+        ? T extends keyof ActionHandlers
+          ? (state: State, action: Action) => State
+          : never
+        : never;
+
+      The real power of these patterns emerges when we combine them. For instance, we can create utility types that help
+      us work with deeply nested objects while maintaining full type safety. Consider this pattern for creating a type-safe
+      path accessor:
+
+      type PathKeys<T> = T extends object
+        ? { [K in keyof T]: K extends string
+            ? T[K] extends object
+              ? K | \`\${K}.\${PathKeys<T[K]>}\`
+              : K
+            : never
+          }[keyof T]
+        : never;
+
+      These patterns also excel in creating type-safe event systems. By combining mapped types with template literals,
+      we can create sophisticated event handling systems that catch errors at compile time rather than runtime:
+
+      type EventMap = {
+        click: { x: number; y: number };
+        change: { value: string };
+      };
+
+      type EventHandlers = {
+        [E in keyof EventMap as \`on\${Capitalize<string & E>}\`]: (event: EventMap[E]) => void;
+      };
+
+      Understanding and applying these patterns effectively requires practice and experience. Start with simpler patterns
+      and gradually work your way up to more complex ones. Remember that the goal is to make your code more maintainable
+      and catch errors early in the development process. TypeScript's type system is a powerful tool for achieving these
+      goals, and mastering these patterns will make you a more effective TypeScript developer.`,
     type: "article" as const,
   },
   {
