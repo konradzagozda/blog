@@ -59,49 +59,132 @@ export function Timeline({ items }: TimelineProps): ReactElement {
   };
 
   return (
-    <MuiTimeline position="right">
-      {items.map((item, index) => (
-        <TimelineItem key={`${item.title}-${index}`}>
-          <TimelineOppositeContent
-            sx={{ m: "auto 0" }}
-            variant="body2"
-            color="text.secondary"
-          >
-            {item.date}
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            {index !== 0 && <TimelineConnector />}
-            <TimelineDot sx={getDotStyles(item.type)}>
-              {getIcon(item.type)}
-            </TimelineDot>
-            {index !== items.length - 1 && <TimelineConnector />}
-          </TimelineSeparator>
-          <TimelineContent
-            sx={{
-              py: "12px",
-              px: 2,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: item.description ? "flex-start" : "center",
-              minHeight: 40,
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="span"
+    <>
+      {/* Desktop Timeline */}
+      <MuiTimeline
+        position="alternate"
+        sx={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          display: { xs: "none", sm: "block" },
+        }}
+      >
+        {items.map((item, index) => (
+          <TimelineItem key={`${item.title}-${index}-desktop`}>
+            <TimelineOppositeContent
               sx={{
-                mt: item.description ? 0 : "auto",
-                mb: item.description ? 0.5 : "auto",
+                m: "auto 0",
+                ...(index === 0 && {
+                  mt: 1.5, // Reduced from 0.5 to 0.25 for finer alignment
+                }),
+                ...(index === items.length - 1 && {
+                  mb: 2.2, // Add bottom margin for last item
+                }),
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {item.date}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              {index !== 0 && <TimelineConnector />}
+              <TimelineDot sx={getDotStyles(item.type)}>
+                {getIcon(item.type)}
+              </TimelineDot>
+              {index !== items.length - 1 && <TimelineConnector />}
+            </TimelineSeparator>
+            <TimelineContent
+              sx={{
+                py: "12px",
+                px: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: item.description ? "flex-start" : "center",
+                minHeight: 40,
               }}
             >
-              {item.title}
-            </Typography>
-            {item.description && (
-              <Typography color="text.secondary">{item.description}</Typography>
-            )}
-          </TimelineContent>
-        </TimelineItem>
-      ))}
-    </MuiTimeline>
+              <Typography
+                variant="h6"
+                component="span"
+                sx={{
+                  mt: item.description ? 0 : "auto",
+                  mb: item.description ? 0.5 : "auto",
+                }}
+              >
+                {item.title}
+              </Typography>
+              {item.description && (
+                <Typography color="text.secondary">
+                  {item.description}
+                </Typography>
+              )}
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </MuiTimeline>
+
+      {/* Mobile Timeline */}
+      <MuiTimeline
+        position="right"
+        sx={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          display: { xs: "block", sm: "none" },
+        }}
+      >
+        {items.map((item, index) => (
+          <TimelineItem key={`${item.title}-${index}-mobile`}>
+            <TimelineOppositeContent
+              sx={{
+                m: "auto 0",
+                ...(index === 0 && {
+                  mt: 1.5,
+                }),
+                ...(index === items.length - 1 && {
+                  mb: 2.2, // Add bottom margin for last item
+                }),
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {item.date}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              {index !== 0 && <TimelineConnector />}
+              <TimelineDot sx={getDotStyles(item.type)}>
+                {getIcon(item.type)}
+              </TimelineDot>
+              {index !== items.length - 1 && <TimelineConnector />}
+            </TimelineSeparator>
+            <TimelineContent
+              sx={{
+                py: "12px",
+                px: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: item.description ? "flex-start" : "center",
+                minHeight: 40,
+              }}
+            >
+              <Typography
+                variant="h6"
+                component="span"
+                sx={{
+                  mt: item.description ? 0 : "auto",
+                  mb: item.description ? 0.5 : "auto",
+                }}
+              >
+                {item.title}
+              </Typography>
+              {item.description && (
+                <Typography color="text.secondary">
+                  {item.description}
+                </Typography>
+              )}
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </MuiTimeline>
+    </>
   );
 }
