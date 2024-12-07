@@ -165,7 +165,11 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         }}
       >
         {items.map((item, index) => (
-          <TimelineItem key={`${item.title}-${index}-mobile`}>
+          <TimelineItem
+            key={`${item.title}-${index}-mobile`}
+            sx={getItemSx(item)}
+            onClick={() => handleItemClick(item)}
+          >
             <TimelineOppositeContent
               sx={{
                 m: "auto 0",

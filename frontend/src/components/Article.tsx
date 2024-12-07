@@ -28,35 +28,51 @@ export function Article(): ReactElement {
         justifyContent: "center",
         position: "relative",
         mt: 4,
-        px: 2, // Add padding for mobile
+        px: { xs: 0, md: 2 }, // Remove padding on mobile
       }}
     >
-      <IconButton
-        onClick={() => void navigate("/")}
-        sx={{
-          position: { xs: "static", md: "absolute" },
-          left: { md: "24px" },
-          top: { md: "0" },
-          mb: { xs: 2, md: 0 },
-          mr: { xs: 1, md: 0 },
-        }}
-      >
-        <ArrowBack />
-      </IconButton>
-
       <Container
         maxWidth="md"
         sx={{
           maxWidth: { xs: "100%", md: "800px" },
         }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography 
+          variant="h4" 
+          gutterBottom
+          sx={{ 
+            px: { xs: 2, md: 0 }, // Match the padding of other elements
+            textAlign: 'center'
+          }}
+        >
           {article.title}
         </Typography>
-        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-          {article.date}
-        </Typography>
-        <Typography variant="body1" sx={{ whiteSpace: "pre-wrap", mt: 4 }}>
+        
+        <Box sx={{ 
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 4,
+          px: { xs: 2, md: 0 }, // Add padding only on mobile
+        }}>
+          <IconButton 
+            onClick={() => void navigate("/")}
+            sx={{ ml: { xs: -1, md: 0 } }} // Align with content on mobile
+          >
+            <ArrowBack />
+          </IconButton>
+          <Typography variant="subtitle1" color="text.secondary">
+            {article.date}
+          </Typography>
+        </Box>
+
+        <Typography 
+          variant="body1" 
+          sx={{ 
+            whiteSpace: "pre-wrap", 
+            px: { xs: 2, md: 0 }, // Add padding only on mobile
+          }}
+        >
           {article.content}
         </Typography>
       </Container>
