@@ -128,12 +128,12 @@ export function Header(): ReactElement {
           >
             {isMobile ? (
               <>
-                Hello!� Here, I explore things,
+                Hello!👋 Here, I explore things,
                 <br />
                 sharing thoughts along the way.
               </>
             ) : (
-              "Hello! 👋 Here, I explore things, sharing thoughts along the way."
+              "Hello!👋 Here, I explore things, sharing thoughts along the way."
             )}
           </Typography>
 
@@ -197,4 +197,4 @@ export function Header(): ReactElement {
       </div>
     </AppBar>
   );
-} 
+}
