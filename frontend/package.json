@@ -17,6 +17,7 @@
     "@mui/lab": "^6.0.0-beta.18",
     "@mui/material": "^6.1.10",
     "@types/react-transition-group": "^4.4.11",
+    "contentful": "^11.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.2",
