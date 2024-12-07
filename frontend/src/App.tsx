@@ -215,7 +215,6 @@ function AnimatedRoutes() {
             height: "100%",
             perspective: "2500px",
             transformStyle: "preserve-3d",
-           overflow: "auto",
           }}
         >
           <Routes location={location}>
@@ -236,11 +235,6 @@ export function App(): ReactElement {
           height: "100vh",
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden",
-          position: "fixed",
-          width: "100%",
-          top: 0,
-          left: 0,
         }}
       >
         <Header />
@@ -248,7 +242,6 @@ export function App(): ReactElement {
           sx={{
             flexGrow: 1,
             position: "relative",
-            overflow: "hidden",
           }}
         >
           <AnimatedRoutes />
