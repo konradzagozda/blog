@@ -15,69 +15,25 @@ import {
 } from "@mui/material";
 import { type ReactElement } from "react";
 
-const generateTimelineItems = () => {
-  const topics = [
-    "React",
-    "TypeScript",
-    "State Management",
-    "Testing",
-    "Performance",
-    "Security",
-    "Design Patterns",
-    "Architecture",
-    "CI/CD",
-    "DevOps",
-  ];
-
-  const articlePrefixes = [
-    "Guide to",
-    "Understanding",
-    "Deep Dive into",
-    "Best Practices for",
-    "Advanced",
-  ];
-
-  const projectPrefixes = [
-    "Building",
-    "Developing",
-    "Creating",
-    "Implementing",
-    "Optimizing",
-  ];
-
-  const items = [];
-  const startDate = new Date(2024, 0, 1); // Start from January 1, 2024
-
-  for (let i = 0; i < 50; i++) {
-    const isArticle = Math.random() > 0.3; // 70% chance of being an article
-    const topic = topics[Math.floor(Math.random() * topics.length)];
-    const prefix = isArticle
-      ? articlePrefixes[Math.floor(Math.random() * articlePrefixes.length)]
-      : projectPrefixes[Math.floor(Math.random() * projectPrefixes.length)];
-
-    const itemDate = new Date(startDate);
-    itemDate.setDate(startDate.getDate() - i * 3); // Each item is 3 days apart
-
-    items.push({
-      date: itemDate.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      }),
-      title: `${prefix} ${topic}`,
-      description: isArticle
-        ? `A comprehensive exploration of ${topic.toLowerCase()} concepts and techniques in modern web development.`
-        : `A practical implementation showcasing ${topic.toLowerCase()} principles in action.`,
-      type: isArticle ? ("article" as const) : ("project" as const),
-    });
-  }
-
-  return items.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-};
-
-const timelineItems = generateTimelineItems();
+const timelineItems = [
+  {
+    date: "Jan 1, 2024",
+    title: "Guide to State Management",
+    description: "A comprehensive exploration of state management concepts and techniques in modern web development.",
+    type: "article" as const,
+  },
+  {
+    date: "Dec 29, 2023",
+    title: "Understanding DevOps",
+    description: "A comprehensive exploration of devops concepts and techniques in modern web development.",
+    type: "article" as const,
+  },
+  {
+    date: "Dec 28, 2023",
+    title: "This Website Is Born! 🎉",
+    type: "celebration" as const,
+  },
+];
 
 export function App(): ReactElement {
   const theme = useTheme();
@@ -104,7 +60,7 @@ export function App(): ReactElement {
               right: 16,
               top: 16,
               display: "flex",
-              gap: "8px",
+              gap: "3px",
               zIndex: 1,
             }}
           >
@@ -122,22 +78,6 @@ export function App(): ReactElement {
               <Email fontSize="small" />
             </IconButton>
             <IconButton
-              href="https://x.com/konrad_zagozda"
-              target="_blank"
-              rel="noreferrer"
-              size={isMobile ? "medium" : "large"}
-              sx={{
-                color: "grey.700",
-                "&:hover": {
-                  color: "primary.main",
-                  bgcolor: "grey.100",
-                },
-              }}
-              aria-label="X profile"
-            >
-              <X />
-            </IconButton>
-            <IconButton
               href="https://www.linkedin.com/in/zagozda/"
               target="_blank"
               rel="noreferrer"
@@ -152,6 +92,22 @@ export function App(): ReactElement {
               aria-label="LinkedIn profile"
             >
               <LinkedIn />
+            </IconButton>
+            <IconButton
+              href="https://x.com/konrad_zagozda"
+              target="_blank"
+              rel="noreferrer"
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                color: "grey.700",
+                "&:hover": {
+                  color: "primary.main",
+                  bgcolor: "grey.100",
+                },
+              }}
+              aria-label="X profile"
+            >
+              <X />
             </IconButton>
           </div>
         )}
@@ -231,22 +187,6 @@ export function App(): ReactElement {
                   <Email fontSize="small" />
                 </IconButton>
                 <IconButton
-                  href="https://x.com/konrad_zagozda"
-                  target="_blank"
-                  rel="noreferrer"
-                  size={isMobile ? "medium" : "large"}
-                  sx={{
-                    color: "grey.700",
-                    "&:hover": {
-                      color: "primary.main",
-                      bgcolor: "grey.100",
-                    },
-                  }}
-                  aria-label="X profile"
-                >
-                  <X />
-                </IconButton>
-                <IconButton
                   href="https://www.linkedin.com/in/zagozda/"
                   target="_blank"
                   rel="noreferrer"
@@ -261,6 +201,22 @@ export function App(): ReactElement {
                   aria-label="LinkedIn profile"
                 >
                   <LinkedIn />
+                </IconButton>
+                <IconButton
+                  href="https://x.com/konrad_zagozda"
+                  target="_blank"
+                  rel="noreferrer"
+                  size={isMobile ? "medium" : "large"}
+                  sx={{
+                    color: "grey.700",
+                    "&:hover": {
+                      color: "primary.main",
+                      bgcolor: "grey.100",
+                    },
+                  }}
+                  aria-label="X profile"
+                >
+                  <X />
                 </IconButton>
               </div>
             )}
