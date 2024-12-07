@@ -136,9 +136,9 @@ function AnimatedRoutes() {
             position: "absolute",
             width: "100%",
             height: "100%",
-            overflow: "auto",
             perspective: "2500px",
             transformStyle: "preserve-3d",
+           overflow: "auto",
           }}
         >
           <Routes location={location}>
@@ -160,6 +160,10 @@ export function App(): ReactElement {
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
+          position: "fixed",
+          width: "100%",
+          top: 0,
+          left: 0,
         }}
       >
         <Header />
