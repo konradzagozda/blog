@@ -39,55 +39,69 @@ export function Header(): ReactElement {
             right: 16,
             top: 16,
             display: "flex",
-            gap: "3px",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            gap: "8px",
             zIndex: 1,
           }}
         >
-          <IconButton
-            href="mailto:zagozdakonrad@gmail.com"
-            size={isMobile ? "medium" : "large"}
+          <div style={{ display: "flex", gap: "3px" }}>
+            <IconButton
+              href="mailto:zagozdakonrad@gmail.com"
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                color: "grey.600",
+                "&:hover": {
+                  color: "primary.main",
+                },
+              }}
+              aria-label="Email"
+            >
+              <Email />
+            </IconButton>
+            <IconButton
+              href="https://www.linkedin.com/in/zagozda/"
+              target="_blank"
+              rel="noreferrer"
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                color: "grey.700",
+                "&:hover": {
+                  color: "primary.main",
+                  bgcolor: "grey.100",
+                },
+              }}
+              aria-label="LinkedIn profile"
+            >
+              <LinkedIn />
+            </IconButton>
+            <IconButton
+              href="https://x.com/konrad_zagozda"
+              target="_blank"
+              rel="noreferrer"
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                color: "grey.700",
+                "&:hover": {
+                  color: "primary.main",
+                  bgcolor: "grey.100",
+                },
+              }}
+              aria-label="X profile"
+            >
+              <X />
+            </IconButton>
+          </div>
+          <Typography
+            variant="body2"
+            color="text.secondary"
             sx={{
-              color: "grey.600",
-              "&:hover": {
-                color: "primary.main",
-              },
+              fontSize: "0.875rem",
+              mt: 0.5,
             }}
-            aria-label="Email"
           >
-            <Email />
-          </IconButton>
-          <IconButton
-            href="https://www.linkedin.com/in/zagozda/"
-            target="_blank"
-            rel="noreferrer"
-            size={isMobile ? "medium" : "large"}
-            sx={{
-              color: "grey.700",
-              "&:hover": {
-                color: "primary.main",
-                bgcolor: "grey.100",
-              },
-            }}
-            aria-label="LinkedIn profile"
-          >
-            <LinkedIn />
-          </IconButton>
-          <IconButton
-            href="https://x.com/konrad_zagozda"
-            target="_blank"
-            rel="noreferrer"
-            size={isMobile ? "medium" : "large"}
-            sx={{
-              color: "grey.700",
-              "&:hover": {
-                color: "primary.main",
-                bgcolor: "grey.100",
-              },
-            }}
-            aria-label="X profile"
-          >
-            <X />
-          </IconButton>
+            Connect with me 👆
+          </Typography>
         </div>
       )}
 

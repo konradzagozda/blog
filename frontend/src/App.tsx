@@ -14,6 +14,7 @@ import { Timeline } from "./components/Timeline";
 import { getBlogEntries, type BlogEntryFields } from "./utils/contentful";
 import { slugify } from "./utils/slugify";
 import { Document } from '@contentful/rich-text-types';
+import { PoweredBy } from "./components/PoweredBy";
 
 // Common properties for all timeline items
 interface BaseTimelineItem {
@@ -142,6 +143,7 @@ export function App(): ReactElement {
         >
           <AnimatedRoutes items={items} />
         </Box>
+        <PoweredBy />
       </Box>
     </BrowserRouter>
   );
