@@ -92,7 +92,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       <MuiTimeline
         position="alternate"
         sx={{
-          maxWidth: "600px",
+          maxWidth: "1000px",
           margin: "0 auto",
           display: { xs: "none", sm: "block" },
         }}
@@ -133,7 +133,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 flexDirection: "column",
                 justifyContent: item.description ? "flex-start" : "center",
                 minHeight: 40,
-                maxWidth: "400px",
+                maxWidth: "500px",
                 overflowWrap: "break-word",
                 wordWrap: "break-word",
                 wordBreak: "break-word",
@@ -176,9 +176,10 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       <MuiTimeline
         position="right"
         sx={{
-          maxWidth: "600px",
+          maxWidth: "1000px",
           margin: "0 auto",
           display: { xs: "block", sm: "none" },
+          pl: 10,
         }}
       >
         {items.map((item, index) => (
@@ -194,8 +195,15 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                   mt: 1.5,
                 }),
                 ...(index === items.length - 1 && {
-                  mb: 2.2, // Add bottom margin for last item
+                  mb: 2.2,
                 }),
+                transform: "rotate(-40deg)",
+                transformOrigin: "right center",
+                width: "90px",
+                position: "absolute",
+                left: "-100px",
+                top: "20px",
+                fontSize: "0.8125rem",
               }}
               variant="body2"
               color="text.secondary"
@@ -211,17 +219,18 @@ export function Timeline({ items }: TimelineProps): ReactElement {
             </TimelineSeparator>
             <TimelineContent
               sx={{
-                py: "12px",
+                py: "8px",
                 px: 2,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: item.description ? "flex-start" : "center",
                 minHeight: 40,
-                maxWidth: "400px",
+                maxWidth: "600px",
                 overflowWrap: "break-word",
                 wordWrap: "break-word",
                 wordBreak: "break-word",
                 hyphens: "auto",
+                ml: 2,
               }}
             >
               <Typography

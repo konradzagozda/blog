@@ -53,17 +53,32 @@ export function Article({ article }: ArticleProps): ReactElement {
             remarkPlugins={[remarkGfm]}
             components={{
               h1: ({ children }) => (
-                <Typography variant="h2" component="h2" gutterBottom>
+                <Typography 
+                  variant="h2" 
+                  component="h2" 
+                  gutterBottom 
+                  sx={{ mt: 4 }}
+                >
                   {children}
                 </Typography>
               ),
               h2: ({ children }) => (
-                <Typography variant="h3" component="h3" gutterBottom>
+                <Typography 
+                  variant="h3" 
+                  component="h3" 
+                  gutterBottom
+                  sx={{ mt: 3.5 }}
+                >
                   {children}
                 </Typography>
               ),
               h3: ({ children }) => (
-                <Typography variant="h4" component="h4" gutterBottom>
+                <Typography 
+                  variant="h4" 
+                  component="h4" 
+                  gutterBottom
+                  sx={{ mt: 3 }}
+                >
                   {children}
                 </Typography>
               ),

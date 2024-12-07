@@ -162,3 +162,28 @@ h6, .MuiTypography-h6 {
   font-size: 1rem !important;
   line-height: 1.5 !important;
 }
+
+@media (max-width: 600px) {
+  /* Smaller font sizes for mobile */
+  h1, .MuiTypography-h1 {
+    font-size: 1.25rem !important;    /* 20px */
+  }
+
+  h2, .MuiTypography-h2 {
+    font-size: 1.125rem !important;   /* 18px */
+  }
+
+  h3, .MuiTypography-h3 {
+    font-size: 1rem !important;       /* 16px */
+  }
+
+  h4, .MuiTypography-h4,
+  h5, .MuiTypography-h5,
+  h6, .MuiTypography-h6 {
+    font-size: 0.9375rem !important;  /* 15px */
+  }
+
+  p, span, div:not(pre div), li, a {
+    font-size: 0.875rem !important;   /* 14px */
+  }
+}
