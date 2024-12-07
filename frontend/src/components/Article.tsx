@@ -2,14 +2,18 @@ import { ArrowBack } from "@mui/icons-material";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import { type ReactElement } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { timelineItems } from "../App";
+import { type TimelineItem } from "../App";
 import { slugify } from "../utils/slugify";
 
-export function Article(): ReactElement {
+interface ArticleProps {
+  items: TimelineItem[];
+}
+
+export function Article({ items }: ArticleProps): ReactElement {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const article = timelineItems.find(
+  const article = items.find(
     (item) => item.type === "article" && slugify(item.title) === (id ?? "")
   );
 
@@ -37,25 +41,27 @@ export function Article(): ReactElement {
           maxWidth: { xs: "100%", md: "800px" },
         }}
       >
-        <Typography 
-          variant="h4" 
+        <Typography
+          variant="h4"
           gutterBottom
-          sx={{ 
+          sx={{
             px: { xs: 2, md: 0 }, // Match the padding of other elements
-            textAlign: 'center'
+            textAlign: "center",
           }}
         >
           {article.title}
         </Typography>
-        
-        <Box sx={{ 
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          mb: 4,
-          px: { xs: 2, md: 0 }, // Add padding only on mobile
-        }}>
-          <IconButton 
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 4,
+            px: { xs: 2, md: 0 }, // Add padding only on mobile
+          }}
+        >
+          <IconButton
             onClick={() => void navigate("/")}
             sx={{ ml: { xs: -1, md: 0 } }} // Align with content on mobile
           >
@@ -66,10 +72,10 @@ export function Article(): ReactElement {
           </Typography>
         </Box>
 
-        <Typography 
-          variant="body1" 
-          sx={{ 
-            whiteSpace: "pre-wrap", 
+        <Typography
+          variant="body1"
+          sx={{
+            whiteSpace: "pre-wrap",
             px: { xs: 2, md: 0 }, // Add padding only on mobile
           }}
         >
