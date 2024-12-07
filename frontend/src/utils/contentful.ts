@@ -7,7 +7,7 @@ const client = createClient({
 });
 
 // Define the possible types for blog entries
-interface BlogEntryFields {
+export interface BlogEntryFields {
   date: string;
   title: string;
   type: "article" | "project" | "celebration";

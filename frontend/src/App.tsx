@@ -1,11 +1,18 @@
-import { Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState, type ReactElement } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Article } from "./components/Article";
 import { Header } from "./components/Header";
 import { Timeline } from "./components/Timeline";
 import { getBlogEntries, type BlogEntryFields } from "./utils/contentful";
+import { slugify } from "./utils/slugify";
 
 // Common properties for all timeline items
 interface BaseTimelineItem {
@@ -15,7 +22,7 @@ interface BaseTimelineItem {
 }
 
 // Article specific properties
-interface ArticleItem extends BaseTimelineItem {
+export interface ArticleItem extends BaseTimelineItem {
   type: "article";
   description: string;
   content: string;
@@ -36,7 +43,24 @@ interface CelebrationItem extends BaseTimelineItem {
 // Union type for all possible timeline items
 type TimelineItem = ArticleItem | ProjectItem | CelebrationItem;
 
-// Create a wrapper component for the routes
+function ArticleRoute({ items }: { items: TimelineItem[] }) {
+  const { id } = useParams();
+
+  const article = items.find(
+    (item) => item.type === "article" && slugify(item.title) === id
+  );
+
+  if (!article || article.type !== "article") {
+    return (
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Typography variant="h4">Article not found</Typography>
+      </Container>
+    );
+  }
+
+  return <Article article={article} />;
+}
+
 function AnimatedRoutes({ items }: { items: TimelineItem[] }) {
   const location = useLocation();
   const isArticlePage = location.pathname.startsWith("/article");
@@ -59,7 +83,10 @@ function AnimatedRoutes({ items }: { items: TimelineItem[] }) {
         >
           <Routes location={location}>
             <Route path="/" element={<Timeline items={items} />} />
-            <Route path="/article/:id" element={<Article items={items} />} />
+            <Route
+              path="/article/:id"
+              element={<ArticleRoute items={items} />}
+            />
           </Routes>
         </Box>
       </CSSTransition>
