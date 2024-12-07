@@ -100,21 +100,25 @@ export function App(): ReactElement {
   useEffect(() => {
     getBlogEntries()
       .then((response) => {
-        const transformedItems = response.items.map(
-          (entry: { fields: BlogEntryFields }) => ({
-            date: entry.fields.date,
+        const transformedItems = response.items.map((entry: Entry<BlogEntry>) => {
+          // Convert ISO date string to a more readable format
+          const date = new Date(entry.fields.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          return {
+            date,
             title: entry.fields.title,
             type: entry.fields.type,
-            ...(entry.fields.description && {
-              description: entry.fields.description,
-            }),
-            ...(entry.fields.content && {
-              content: entry.fields.content.content[0].content[0].value,
+            ...(entry.fields.description && { description: entry.fields.description }),
+            ...(entry.fields.content && { 
+              content: entry.fields.content.content[0].content[0].value 
             }),
             ...(entry.fields.link && { link: entry.fields.link }),
-          })
-        ) as TimelineItem[];
-        console.log("Transformed items:", transformedItems);
+          };
+        }) as TimelineItem[];
         setItems(transformedItems);
       })
       .catch((error) => console.error("Error fetching blog entries:", error));
