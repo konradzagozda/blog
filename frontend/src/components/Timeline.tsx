@@ -1,4 +1,4 @@
-import { Article, Star, Terminal } from "@mui/icons-material";
+import { Article, Star } from "@mui/icons-material";
 import {
   Timeline as MuiTimeline,
   TimelineConnector,
@@ -42,12 +42,9 @@ export function Timeline({ items }: TimelineProps): ReactElement {
           textAlign: "right",
           paddingRight: 3,
           margin: "auto 0",
-          alignSelf: "center",
         },
         [`& .MuiTimelineContent-root`]: {
-          flex: 2,
-          paddingRight: { xs: 2, sm: 6 },
-          paddingY: 2,
+          padding: "12px 16px",
         },
         px: { xs: 2, sm: 4 },
         maxWidth: 1000,
@@ -55,61 +52,41 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       }}
     >
       {items.map((item, index) => (
-        <TimelineItem key={item.title}>
-          <TimelineOppositeContent
-            variant="body2"
-            color="text.secondary"
-            sx={{ pt: 0.5 }}
-          >
+        <TimelineItem key={`${item.title}-${index}`}>
+          <TimelineOppositeContent color="text.secondary">
             {item.date}
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineConnector />
+            {index !== 0 && <TimelineConnector />}
             <TimelineDot
-              color={
-                item.type === "article"
-                  ? "primary"
-                  : item.type === "celebration"
-                  ? "secondary"
-                  : "secondary"
-              }
-              sx={
-                item.type === "celebration"
-                  ? {
-                      bgcolor: "secondary.main",
-                      color: "secondary.contrastText",
-                    }
-                  : undefined
-              }
+              sx={{
+                bgcolor:
+                  item.type === "celebration"
+                    ? "secondary.main"
+                    : "primary.main",
+                p: item.type === "celebration" ? 1 : undefined,
+              }}
             >
-              {item.type === "article" ? (
-                <Article />
-              ) : item.type === "celebration" ? (
-                <Star />
+              {item.type === "celebration" ? (
+                <Star fontSize="small" />
               ) : (
-                <Terminal />
+                <Article />
               )}
             </TimelineDot>
-            <TimelineConnector
-              sx={{
-                display: index === items.length - 1 ? "none" : "block",
-              }}
-            />
+            {index !== items.length - 1 && <TimelineConnector />}
           </TimelineSeparator>
-          <TimelineContent
-            sx={{
-              py: "12px",
-              px: { xs: 2, sm: 3 },
-              pr: { sm: 6 },
-            }}
-          >
-            <Typography variant="h6" component="span">
+          <TimelineContent>
+            <Typography variant="h6" component="div">
               {item.title}
             </Typography>
-            {item.description && <Typography>{item.description}</Typography>}
+            {item.description && (
+              <Typography color="text.secondary" sx={{ mt: 0.5 }}>
+                {item.description}
+              </Typography>
+            )}
           </TimelineContent>
         </TimelineItem>
       ))}
     </MuiTimeline>
   );
-} 
+}
