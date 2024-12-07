@@ -1,8 +1,10 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { type ReactElement } from "react";
 import { Header } from "./components/Header";
 import { Timeline } from "./components/Timeline";
+import { Article } from "./components/Article";
 
-const timelineItems = [
+export const timelineItems = [
   {
     date: "Jan 15, 2024",
     title: "Advanced TypeScript Patterns",
@@ -57,9 +59,12 @@ const timelineItems = [
 
 export function App(): ReactElement {
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <Timeline items={timelineItems} />
-    </>
+      <Routes>
+        <Route path="/" element={<Timeline items={timelineItems} />} />
+        <Route path="/article/:id" element={<Article />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

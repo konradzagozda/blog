@@ -10,6 +10,8 @@ import {
 } from "@mui/lab";
 import { Typography } from "@mui/material";
 import { type ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
+import { slugify } from "../utils/slugify";
 
 interface TimelineItemData {
   date: string;
@@ -25,6 +27,8 @@ interface TimelineProps {
 }
 
 export function Timeline({ items }: TimelineProps): ReactElement {
+  const navigate = useNavigate();
+
   const getIcon = (type: TimelineItemData["type"]) => {
     switch (type) {
       case "article":
@@ -60,6 +64,28 @@ export function Timeline({ items }: TimelineProps): ReactElement {
     }
   };
 
+  const handleItemClick = (item: TimelineItemData) => {
+    if (item.type === "project" && item.link) {
+      window.open(item.link, '_blank', 'noopener,noreferrer');
+    } else if (item.type === "article") {
+      navigate(`/article/${slugify(item.title)}`);
+    }
+  };
+
+  const getItemSx = (item: TimelineItemData) => {
+    if (item.type === "project" && item.link || item.type === "article") {
+      return {
+        cursor: 'pointer',
+        borderRadius: 1,
+        transition: 'background-color 0.2s ease-in-out',
+        '&:hover': {
+          bgcolor: 'rgba(0, 0, 0, 0.03)',
+        },
+      };
+    }
+    return undefined;
+  };
+
   return (
     <>
       {/* Desktop Timeline */}
@@ -74,19 +100,8 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         {items.map((item, index) => (
           <TimelineItem 
             key={`${item.title}-${index}-desktop`}
-            sx={item.type === 'project' && item.link ? {
-              cursor: 'pointer',
-              borderRadius: 1,
-              transition: 'background-color 0.2s ease-in-out',
-              '&:hover': {
-                bgcolor: 'rgba(0, 0, 0, 0.03)',
-              },
-            } : undefined}
-            onClick={() => {
-              if (item.type === 'project' && item.link) {
-                window.open(item.link, '_blank', 'noopener,noreferrer');
-              }
-            }}
+            sx={getItemSx(item)}
+            onClick={() => handleItemClick(item)}
           >
             <TimelineOppositeContent
               sx={{
