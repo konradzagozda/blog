@@ -1,10 +1,10 @@
+import { Document } from "@contentful/rich-text-types";
 import { createClient, type Entry } from "contentful";
-import { Document } from '@contentful/rich-text-types';
 
 const client = createClient({
   space: "5qd8uxunnv69",
   environment: "master",
-  accessToken: "gkmni5rbKRJ2hnLNnxDlBMwgX9S2fsQP9WlmhIgyblI",
+  accessToken: "gkmni5rbKRJ2hnLNnxDlBMwgX9S2fsQP9WlmhIgyblI", // read only access token
 });
 
 // Define the possible types for blog entries
