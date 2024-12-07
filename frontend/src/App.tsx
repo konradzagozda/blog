@@ -1,3 +1,4 @@
+import { Document } from "@contentful/rich-text-types";
 import { Box } from "@mui/material";
 import { useEffect, useState, type ReactElement } from "react";
 import {
@@ -10,11 +11,10 @@ import {
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Article } from "./components/Article";
 import { Header } from "./components/Header";
-import { Timeline } from "./components/Timeline";
-import { getBlogEntries, type BlogEntryFields } from "./utils/contentful";
-import { slugify } from "./utils/slugify";
-import { Document } from '@contentful/rich-text-types';
 import { PoweredBy } from "./components/PoweredBy";
+import { Timeline } from "./components/Timeline";
+import { getBlogEntries } from "./utils/contentful";
+import { slugify } from "./utils/slugify";
 
 // Common properties for all timeline items
 interface BaseTimelineItem {
@@ -102,22 +102,29 @@ export function App(): ReactElement {
   useEffect(() => {
     getBlogEntries()
       .then((response) => {
-        const transformedItems = response.items.map((entry: Entry<BlogEntry>) => {
-          const date = new Date(entry.fields.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          });
+        const transformedItems = response.items.map(
+          (entry: Entry<BlogEntry>) => {
+            const date = new Date(entry.fields.date).toLocaleDateString(
+              "en-US",
+              {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            );
 
-          return {
-            date,
-            title: entry.fields.title,
-            type: entry.fields.type,
-            ...(entry.fields.description && { description: entry.fields.description }),
-            ...(entry.fields.content && { content: entry.fields.content }),
-            ...(entry.fields.link && { link: entry.fields.link }),
-          };
-        }) as TimelineItem[];
+            return {
+              date,
+              title: entry.fields.title,
+              type: entry.fields.type,
+              ...(entry.fields.description && {
+                description: entry.fields.description,
+              }),
+              ...(entry.fields.content && { content: entry.fields.content }),
+              ...(entry.fields.link && { link: entry.fields.link }),
+            };
+          }
+        ) as TimelineItem[];
         setItems(transformedItems);
       })
       .catch((error) => console.error("Error fetching blog entries:", error));
@@ -125,8 +132,8 @@ export function App(): ReactElement {
 
   return (
     <BrowserRouter>
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
@@ -135,8 +142,8 @@ export function App(): ReactElement {
         }}
       >
         <Header />
-        <Box 
-          sx={{ 
+        <Box
+          sx={{
             flex: 1,
             position: "relative",
           }}
