@@ -1,4 +1,4 @@
-import { Article, Star, Terminal } from "@mui/icons-material";
+import { Article, GitHub, Star } from "@mui/icons-material";
 import {
   Timeline as MuiTimeline,
   TimelineConnector,
@@ -16,6 +16,8 @@ interface TimelineItemData {
   title: string;
   description?: string;
   type: "article" | "project" | "celebration";
+  content?: string; // For articles
+  link?: string; // For projects
 }
 
 interface TimelineProps {
@@ -28,7 +30,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       case "article":
         return <Article />;
       case "project":
-        return <Terminal />;
+        return <GitHub />;
       case "celebration":
         return <Star />;
     }
