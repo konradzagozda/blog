@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { type ReactElement } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Header } from "./components/Header";
 import { Timeline } from "./components/Timeline";
 import { Article } from "./components/Article";
@@ -58,6 +59,36 @@ export const timelineItems = [
   },
 ];
 
+// Create a wrapper component for the routes
+function AnimatedRoutes() {
+  const location = useLocation();
+  const isArticlePage = location.pathname.startsWith('/article');
+  
+  return (
+    <TransitionGroup component={null}>
+      <CSSTransition 
+        key={location.pathname} 
+        timeout={600} 
+        classNames={isArticlePage ? "slide-left" : "slide-right"}
+      >
+        <Box sx={{ 
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          overflow: 'auto',
+          perspective: '2500px',
+          transformStyle: 'preserve-3d',
+        }}>
+          <Routes location={location}>
+            <Route path="/" element={<Timeline items={timelineItems} />} />
+            <Route path="/article/:id" element={<Article />} />
+          </Routes>
+        </Box>
+      </CSSTransition>
+    </TransitionGroup>
+  );
+}
+
 export function App(): ReactElement {
   return (
     <BrowserRouter>
@@ -65,23 +96,15 @@ export function App(): ReactElement {
         height: '100vh', 
         display: 'flex', 
         flexDirection: 'column',
-        overflow: 'hidden', // Prevent body scroll
+        overflow: 'hidden',
       }}>
         <Header />
         <Box sx={{ 
           flexGrow: 1,
-          overflow: 'auto',
-          // Hide scrollbar for WebKit browsers
-          '&::-webkit-scrollbar': {
-            display: 'none'
-          },
-          // Hide scrollbar for Firefox
-          scrollbarWidth: 'none',
+          position: 'relative',
+          overflow: 'hidden',
         }}>
-          <Routes>
-            <Route path="/" element={<Timeline items={timelineItems} />} />
-            <Route path="/article/:id" element={<Article />} />
-          </Routes>
+          <AnimatedRoutes />
         </Box>
       </Box>
     </BrowserRouter>
