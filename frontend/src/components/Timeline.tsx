@@ -88,18 +88,18 @@ export function Timeline({ items }: TimelineProps): ReactElement {
 
   return (
     <>
-      {/* Desktop Timeline */}
+      {/* Desktop/Tablet Timeline */}
       <MuiTimeline
         position="alternate"
         sx={{
-          maxWidth: "800px",
+          maxWidth: "600px",
           margin: "0 auto",
           display: { xs: "none", sm: "block" },
         }}
       >
         {items.map((item, index) => (
           <TimelineItem
-            key={`${item.title}-${index}-desktop`}
+            key={`${item.title}-${index}`}
             sx={getItemSx(item)}
             onClick={() => handleItemClick(item)}
           >
@@ -133,20 +133,37 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 flexDirection: "column",
                 justifyContent: item.description ? "flex-start" : "center",
                 minHeight: 40,
+                maxWidth: "400px",
+                overflowWrap: "break-word",
+                wordWrap: "break-word",
+                wordBreak: "break-word",
+                hyphens: "auto",
               }}
             >
               <Typography
-                variant="h6"
-                component="span"
+                variant="h5"
+                component="h5"
                 sx={{
-                  mt: item.description ? 0 : "auto",
-                  mb: item.description ? 0.5 : "auto",
+                  color: "text.primary",
+                  mb: 1,
+                  overflowWrap: "break-word",
+                  wordWrap: "break-word",
+                  wordBreak: "break-word",
+                  hyphens: "auto",
                 }}
               >
                 {item.title}
               </Typography>
               {item.description && (
-                <Typography color="text.secondary">
+                <Typography 
+                  color="text.secondary"
+                  sx={{
+                    overflowWrap: "break-word",
+                    wordWrap: "break-word",
+                    wordBreak: "break-word",
+                    hyphens: "auto",
+                  }}
+                >
                   {item.description}
                 </Typography>
               )}
@@ -159,7 +176,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
       <MuiTimeline
         position="right"
         sx={{
-          maxWidth: "800px",
+          maxWidth: "600px",
           margin: "0 auto",
           display: { xs: "block", sm: "none" },
         }}
@@ -200,20 +217,37 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 flexDirection: "column",
                 justifyContent: item.description ? "flex-start" : "center",
                 minHeight: 40,
+                maxWidth: "400px",
+                overflowWrap: "break-word",
+                wordWrap: "break-word",
+                wordBreak: "break-word",
+                hyphens: "auto",
               }}
             >
               <Typography
-                variant="h6"
-                component="span"
+                variant="h5"
+                component="h5"
                 sx={{
-                  mt: item.description ? 0 : "auto",
-                  mb: item.description ? 0.5 : "auto",
+                  color: "text.primary",
+                  mb: 1,
+                  overflowWrap: "break-word",
+                  wordWrap: "break-word",
+                  wordBreak: "break-word",
+                  hyphens: "auto",
                 }}
               >
                 {item.title}
               </Typography>
               {item.description && (
-                <Typography color="text.secondary">
+                <Typography 
+                  color="text.secondary"
+                  sx={{
+                    overflowWrap: "break-word",
+                    wordWrap: "break-word",
+                    wordBreak: "break-word",
+                    hyphens: "auto",
+                  }}
+                >
                   {item.description}
                 </Typography>
               )}

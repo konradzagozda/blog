@@ -12,20 +12,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-size: 16px;
 }
 
 body {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-family: 'Nunito', 'Roboto', sans-serif !important;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  padding: 0;
 }
 
 /* This ensures all text elements use the same base size and font */
 p, span, div:not(pre div), li, a {
-  font-size: 1.0625rem !important;
+  font-size: 1rem !important;
   font-family: 'Nunito', 'Roboto', sans-serif !important;
 }
 

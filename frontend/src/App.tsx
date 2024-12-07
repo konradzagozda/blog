@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState, type ReactElement } from "react";
 import {
   BrowserRouter,
@@ -124,9 +124,22 @@ export function App(): ReactElement {
 
   return (
     <BrowserRouter>
-      <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      <Box 
+        sx={{ 
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          margin: 0,
+          padding: 0,
+        }}
+      >
         <Header />
-        <Box sx={{ flexGrow: 1, position: "relative" }}>
+        <Box 
+          sx={{ 
+            flex: 1,
+            position: "relative",
+          }}
+        >
           <AnimatedRoutes items={items} />
         </Box>
       </Box>

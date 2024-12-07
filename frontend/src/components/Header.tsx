@@ -24,6 +24,12 @@ export function Header(): ReactElement {
         position: "relative",
         width: "100%",
         overflow: "hidden",
+        padding: 0,
+        margin: 0,
+        "& > div": {
+          margin: 0,
+          padding: 0,
+        },
       }}
     >
       {!isMobile && (
@@ -39,7 +45,7 @@ export function Header(): ReactElement {
         >
           <IconButton
             href="mailto:zagozdakonrad@gmail.com"
-            size="small"
+            size={isMobile ? "medium" : "large"}
             sx={{
               color: "grey.600",
               "&:hover": {
@@ -48,7 +54,7 @@ export function Header(): ReactElement {
             }}
             aria-label="Email"
           >
-            <Email fontSize="small" />
+            <Email />
           </IconButton>
           <IconButton
             href="https://www.linkedin.com/in/zagozda/"
@@ -90,7 +96,7 @@ export function Header(): ReactElement {
           maxWidth: 600,
           width: "100%",
           margin: "0 auto",
-          padding: "24px 16px",
+          padding: "16px 0",
           overflow: "hidden",
         }}
       >
@@ -160,7 +166,7 @@ export function Header(): ReactElement {
             >
               <IconButton
                 href="mailto:zagozdakonrad@gmail.com"
-                size="small"
+                size={isMobile ? "medium" : "large"}
                 sx={{
                   color: "grey.600",
                   "&:hover": {
@@ -169,7 +175,7 @@ export function Header(): ReactElement {
                 }}
                 aria-label="Email"
               >
-                <Email fontSize="small" />
+                <Email />
               </IconButton>
               <IconButton
                 href="https://www.linkedin.com/in/zagozda/"
