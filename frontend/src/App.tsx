@@ -182,7 +182,7 @@ export function App(): ReactElement {
                 fontSize: { xs: "1.5rem", sm: "1.75rem" },
                 mb: 1,
                 wordBreak: "break-word",
-                maxWidth: "400px",
+                maxWidth: "600px",
                 mx: "auto",
               }}
             >
@@ -193,12 +193,19 @@ export function App(): ReactElement {
               sx={{
                 color: "text.secondary",
                 mb: isMobile ? 2 : 0,
-                maxWidth: "400px",
+                maxWidth: "600px",
                 mx: "auto",
                 wordBreak: "break-word",
               }}
             >
-              This space is where I share insights, lessons, and practical tips from my tech journey.
+              {isMobile ? (
+                <>
+                  Hello! 👋 Here, I explore things,<br />
+                  sharing thoughts along the way.
+                </>
+              ) : (
+                "Hello! 👋 Here, I explore things, sharing thoughts along the way."
+              )}
             </Typography>
 
             {isMobile && (
@@ -266,8 +273,8 @@ export function App(): ReactElement {
           [`& .MuiTimelineItem-root`]: {
             minHeight: 100,
             "&:before": {
-              display: "none"
-            }
+              display: "none",
+            },
           },
           [`& .MuiTimelineOppositeContent-root`]: {
             flex: "0 0 120px",
@@ -304,11 +311,13 @@ export function App(): ReactElement {
               </TimelineDot>
               <TimelineConnector />
             </TimelineSeparator>
-            <TimelineContent sx={{ 
-              py: "12px", 
-              px: { xs: 2, sm: 3 }, 
-              pr: { sm: 6 }
-            }}>
+            <TimelineContent
+              sx={{
+                py: "12px",
+                px: { xs: 2, sm: 3 },
+                pr: { sm: 6 },
+              }}
+            >
               <Typography variant="h6" component="span">
                 {item.title}
               </Typography>
