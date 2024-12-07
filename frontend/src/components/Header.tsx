@@ -1,11 +1,11 @@
 import { Email, LinkedIn, X } from "@mui/icons-material";
 import {
   AppBar,
+  Box,
   IconButton,
   Typography,
   useMediaQuery,
   useTheme,
-  Box,
 } from "@mui/material";
 import { type ReactElement } from "react";
 
@@ -102,24 +102,33 @@ export function Header(): ReactElement {
             padding: "0 24px",
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
+            }}
+          >
             <Typography
               variant="body1"
               sx={{
                 color: "text.secondary",
+                mb: -2,
               }}
             >
               Hello! 👋 I&apos;m
             </Typography>
-            
+
             <Typography
               variant="h1"
               component="h1"
               sx={{
                 color: "text.primary",
                 fontSize: { xs: "1.5rem", sm: "1.75rem" },
-                display: 'inline',
-                mt: -1.1,
+                display: "inline",
+                mt: -0.1,
+                mb: -1,
               }}
             >
               Konrad Zagozda
@@ -134,6 +143,7 @@ export function Header(): ReactElement {
               maxWidth: "600px",
               mx: "auto",
               wordBreak: "break-word",
+              mt: 0.5,
             }}
           >
             Here, I explore things, sharing thoughts along the way.
