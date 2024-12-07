@@ -13,6 +13,7 @@ import { Header } from "./components/Header";
 import { Timeline } from "./components/Timeline";
 import { getBlogEntries, type BlogEntryFields } from "./utils/contentful";
 import { slugify } from "./utils/slugify";
+import { Document } from '@contentful/rich-text-types';
 
 // Common properties for all timeline items
 interface BaseTimelineItem {
@@ -25,7 +26,7 @@ interface BaseTimelineItem {
 export interface ArticleItem extends BaseTimelineItem {
   type: "article";
   description: string;
-  content: string;
+  content: Document | string;
 }
 
 // Project specific properties
@@ -101,7 +102,6 @@ export function App(): ReactElement {
     getBlogEntries()
       .then((response) => {
         const transformedItems = response.items.map((entry: Entry<BlogEntry>) => {
-          // Convert ISO date string to a more readable format
           const date = new Date(entry.fields.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
@@ -113,9 +113,7 @@ export function App(): ReactElement {
             title: entry.fields.title,
             type: entry.fields.type,
             ...(entry.fields.description && { description: entry.fields.description }),
-            ...(entry.fields.content && { 
-              content: entry.fields.content.content[0].content[0].value 
-            }),
+            ...(entry.fields.content && { content: entry.fields.content }),
             ...(entry.fields.link && { link: entry.fields.link }),
           };
         }) as TimelineItem[];

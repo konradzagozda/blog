@@ -1,4 +1,5 @@
 import { createClient, type Entry } from "contentful";
+import { Document } from '@contentful/rich-text-types';
 
 const client = createClient({
   space: "5qd8uxunnv69",
@@ -12,20 +13,7 @@ export interface BlogEntryFields {
   title: string;
   type: "article" | "project" | "celebration";
   description?: string;
-  content?: {
-    nodeType: "document";
-    data: Record<string, unknown>;
-    content: {
-      nodeType: "paragraph";
-      data: Record<string, unknown>;
-      content: {
-        nodeType: "text";
-        data: Record<string, unknown>;
-        marks: unknown[];
-        value: string;
-      }[];
-    }[];
-  };
+  content?: Document;
   link?: string;
 }
 
