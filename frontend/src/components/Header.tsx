@@ -98,10 +98,18 @@ export function Header(): ReactElement {
             sx={{
               fontSize: "0.875rem",
               mt: 0.5,
+              position: "relative",
+              right: "36px",
+              "&::after": {
+                content: '"Connect with me 👆"',
+                position: "absolute",
+                top: "-12px",
+                right: 0,
+                whiteSpace: "nowrap",
+                transform: "translateX(24px)",
+              },
             }}
-          >
-            Connect with me 👆
-          </Typography>
+          ></Typography>
         </div>
       )}
 
