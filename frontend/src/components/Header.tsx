@@ -164,33 +164,35 @@ export function Header(): ReactElement {
             ></Typography>
           </Box>
           <Box sx={{ maxWidth: "70%", pl: 3, pt: 2 }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
-              <Typography 
-                variant="body1" 
+            <Box
+              sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}
+            >
+              <Typography
+                variant="body1"
                 color="text.secondary"
                 sx={{ mb: -0.5 }}
               >
                 Hello! 👋 I&apos;m
               </Typography>
-              <Typography 
-                variant="h4" 
+              <Typography
+                variant="h4"
                 color="text.primary"
                 sx={{
                   fontSize: "1.75rem",
-                  mt: 0.5
+                  mt: 0.5,
                 }}
               >
                 Konrad Zagozda
               </Typography>
             </Box>
-            <Typography 
-              variant="body1" 
+            <Typography
+              variant="body1"
               color="text.secondary"
-              sx={{ 
+              sx={{
                 mt: 0.5,
                 mb: 2,
                 whiteSpace: "nowrap",
-                maxWidth: "500px"
+                maxWidth: "500px",
               }}
             >
               Here, I explore things, sharing thoughts along the way.
@@ -211,7 +213,7 @@ export function Header(): ReactElement {
           <div
             style={{
               textAlign: "center",
-              marginTop: "8px",
+              marginTop: "16px",
               maxWidth: "100%",
               padding: "0 24px",
             }}
@@ -222,6 +224,7 @@ export function Header(): ReactElement {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 1,
+                mb: 1.5,
               }}
             >
               <Typography
@@ -235,13 +238,13 @@ export function Header(): ReactElement {
               </Typography>
 
               <Typography
-                variant="h4"
+                variant="h1"
                 sx={{
                   color: "text.primary",
                   fontSize: { xs: "1.5rem", sm: "1.75rem" },
                   display: "inline",
-                  mt: -0.1,
-                  mb: -1,
+                  mt: 0.5,
+                  mb: -1.5,
                 }}
               >
                 Konrad Zagozda
@@ -256,7 +259,7 @@ export function Header(): ReactElement {
                 maxWidth: "600px",
                 mx: "auto",
                 wordBreak: "break-word",
-                mt: 0.5,
+                mt: 2,
               }}
             >
               Here, I explore things, sharing thoughts along the way.
@@ -268,10 +271,54 @@ export function Header(): ReactElement {
                   display: "flex",
                   justifyContent: "center",
                   gap: "16px",
-                  marginTop: "16px",
+                  marginTop: "8px",
                 }}
               >
-                {socialIcons}
+                <IconButton
+                  href="mailto:zagozdakonrad@gmail.com"
+                  size="small"
+                  sx={{
+                    color: "grey.600",
+                    "&:hover": {
+                      color: "primary.main",
+                    },
+                  }}
+                  aria-label="Email"
+                >
+                  <Email fontSize="small" />
+                </IconButton>
+                <IconButton
+                  href="https://www.linkedin.com/in/zagozda/"
+                  target="_blank"
+                  rel="noreferrer"
+                  size="small"
+                  sx={{
+                    color: "grey.700",
+                    "&:hover": {
+                      color: "primary.main",
+                      bgcolor: "grey.100",
+                    },
+                  }}
+                  aria-label="LinkedIn profile"
+                >
+                  <LinkedIn fontSize="small" />
+                </IconButton>
+                <IconButton
+                  href="https://x.com/konrad_zagozda"
+                  target="_blank"
+                  rel="noreferrer"
+                  size="small"
+                  sx={{
+                    color: "grey.700",
+                    "&:hover": {
+                      color: "primary.main",
+                      bgcolor: "grey.100",
+                    },
+                  }}
+                  aria-label="X profile"
+                >
+                  <X fontSize="small" />
+                </IconButton>
               </div>
             )}
           </div>

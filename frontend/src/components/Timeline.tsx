@@ -1,3 +1,4 @@
+import { Document } from "@contentful/rich-text-types";
 import { Article, GitHub, Star } from "@mui/icons-material";
 import {
   Timeline as MuiTimeline,
@@ -12,7 +13,6 @@ import { Typography } from "@mui/material";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { slugify } from "../utils/slugify";
-import { Document } from "@contentful/rich-text-types";
 
 interface TimelineItemData {
   date: string;
@@ -123,15 +123,15 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               {item.date}
             </TimelineOppositeContent>
             <TimelineSeparator>
-              <TimelineConnector 
+              <TimelineConnector
                 sx={{
                   visibility: index === 0 ? "hidden" : "visible",
-                }} 
+                }}
               />
               <TimelineDot sx={getDotStyles(item.type)}>
                 {getIcon(item.type)}
               </TimelineDot>
-              <TimelineConnector 
+              <TimelineConnector
                 sx={{
                   visibility: index === items.length - 1 ? "hidden" : "visible",
                 }}
@@ -145,7 +145,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 justifyContent: "center",
                 margin: 0,
                 minWidth: 0,
-                flex: 1
+                flex: 1,
               }}
             >
               <Typography
@@ -157,7 +157,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  minWidth: 0
+                  minWidth: 0,
                 }}
               >
                 {item.title}
@@ -211,15 +211,15 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               {item.date}
             </TimelineOppositeContent>
             <TimelineSeparator>
-              <TimelineConnector 
+              <TimelineConnector
                 sx={{
                   visibility: index === 0 ? "hidden" : "visible",
-                }} 
+                }}
               />
               <TimelineDot sx={getDotStyles(item.type)}>
                 {getIcon(item.type)}
               </TimelineDot>
-              <TimelineConnector 
+              <TimelineConnector
                 sx={{
                   visibility: index === items.length - 1 ? "hidden" : "visible",
                 }}
@@ -235,19 +235,19 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 minHeight: 40,
                 maxWidth: "600px",
                 minWidth: 0,
-                flex: 1
+                flex: 1,
               }}
             >
               <Typography
-                variant="h5"
-                component="h5"
+                variant="h3"
+                component="h3"
                 sx={{
                   color: "text.primary",
                   mb: 1,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  minWidth: 0
+                  minWidth: 0,
                 }}
               >
                 {item.title}
