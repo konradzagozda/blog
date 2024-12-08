@@ -1,6 +1,6 @@
 import { Document } from "@contentful/rich-text-types";
 import { Box, Container, Typography } from "@mui/material";
-import { Entry } from "contentful";
+import { Entry, EntrySkeletonType } from "contentful";
 import { useEffect, useState, type ReactElement } from "react";
 import {
   BrowserRouter,
@@ -47,7 +47,7 @@ interface CelebrationItem extends BaseTimelineItem {
 type TimelineItem = ArticleItem | ProjectItem | CelebrationItem;
 
 // Add these type definitions at the top with your other interfaces
-interface BlogEntry {
+interface BlogEntry extends EntrySkeletonType {
   fields: {
     date: string;
     title: string;
@@ -117,7 +117,7 @@ export function App(): ReactElement {
       .then((response) => {
         const transformedItems = response.items.map(
           (entry: Entry<BlogEntry>) => {
-            const date = new Date(entry.fields.date).toLocaleDateString(
+            const date = new Date(entry.fields.date as unknown as string).toLocaleDateString(
               "en-US",
               {
                 year: "numeric",
@@ -128,13 +128,17 @@ export function App(): ReactElement {
 
             return {
               date,
-              title: entry.fields.title,
-              type: entry.fields.type,
+              title: entry.fields.title as unknown as string,
+              type: entry.fields.type as unknown as "article" | "project" | "celebration",
               ...(entry.fields.description && {
-                description: entry.fields.description,
+                description: entry.fields.description as unknown as string,
               }),
-              ...(entry.fields.content && { content: entry.fields.content }),
-              ...(entry.fields.link && { link: entry.fields.link }),
+              ...(entry.fields.content && { 
+                content: entry.fields.content as unknown as (Document | string)
+              }),
+              ...(entry.fields.link && { 
+                link: entry.fields.link as unknown as string 
+              }),
             } as TimelineItem;
           }
         );
