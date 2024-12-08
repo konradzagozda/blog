@@ -10,8 +10,8 @@ import {
   useParams,
 } from "react-router-dom";
 import { Article } from "./components/Article";
+import { BuiltWith } from "./components/BuiltWith";
 import { Header } from "./components/Header";
-import { PoweredBy } from "./components/PoweredBy";
 import { Timeline } from "./components/Timeline";
 import { getBlogEntries } from "./utils/contentful";
 import { slugify } from "./utils/slugify";
@@ -96,12 +96,13 @@ export function App(): ReactElement {
       .then((response) => {
         const transformedItems = response.items
           .map((entry: Entry<BlogEntry>) => {
-            const date = new Date(entry.fields.date as unknown as string)
-              .toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              });
+            const date = new Date(
+              entry.fields.date as unknown as string
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
 
             return {
               date,
@@ -146,12 +147,12 @@ export function App(): ReactElement {
           sx={{
             flex: 1,
             position: "relative",
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           <AnimatedRoutes items={items} />
         </Box>
-        <PoweredBy />
+        <BuiltWith />
       </Box>
     </BrowserRouter>
   );

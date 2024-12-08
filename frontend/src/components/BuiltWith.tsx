@@ -11,7 +11,7 @@ import contentfulLogo from "../assets/contentful.svg";
 import githubLogo from "../assets/github.svg";
 import reactLogo from "../assets/react.svg";
 
-export function PoweredBy(): ReactElement {
+export function BuiltWith(): ReactElement {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -20,7 +20,7 @@ export function PoweredBy(): ReactElement {
       sx={{
         position: "fixed",
         bottom: isMobile ? 16 : 16,
-        right: isMobile ? 8 : 16,
+        right: isMobile ? 8 : 26,
         display: "flex",
         flexDirection: isMobile ? "column-reverse" : "row",
         alignItems: isMobile ? "flex-end" : "center",
