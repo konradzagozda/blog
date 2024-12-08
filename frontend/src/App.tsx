@@ -94,18 +94,18 @@ export function App(): ReactElement {
   useEffect(() => {
     getBlogEntries()
       .then((response) => {
-        const transformedItems = response.items.map(
-          (entry: Entry<BlogEntry>) => {
-            const date = new Date(
-              entry.fields.date as unknown as string
-            ).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            });
+        const transformedItems = response.items
+          .map((entry: Entry<BlogEntry>) => {
+            const date = new Date(entry.fields.date as unknown as string)
+              .toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              });
 
             return {
               date,
+              rawDate: new Date(entry.fields.date as unknown as string),
               title: entry.fields.title as unknown as string,
               type: entry.fields.type as unknown as
                 | "article"
@@ -120,9 +120,11 @@ export function App(): ReactElement {
               ...(entry.fields.link && {
                 link: entry.fields.link as unknown as string,
               }),
-            } as TimelineItem;
-          }
-        );
+            } as TimelineItem & { rawDate: Date };
+          })
+          .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime())
+          .map(({ rawDate, ...item }) => item);
+
         setItems(transformedItems);
       })
       .catch((error) => console.error("Error fetching blog entries:", error));
