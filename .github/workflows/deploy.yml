@@ -2,7 +2,7 @@ name: Deploy to AWS
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -31,25 +31,25 @@ jobs:
         working-directory: frontend
         run: yarn build
 
-#      - name: Setup Terraform
-#        uses: hashicorp/setup-terraform@v3
-#        with:
-#          terraform_version: "1.9.0"
-#
-#      - name: Terraform Init
-#        working-directory: tf
-#        run: terraform init
-#
-#      - name: Terraform Plan
-#        working-directory: tf
-#        run: terraform plan
-#
-#      - name: Terraform Apply
-#        working-directory: tf
-#        run: terraform apply -auto-approve
+      #      - name: Setup Terraform
+      #        uses: hashicorp/setup-terraform@v3
+      #        with:
+      #          terraform_version: "1.9.0"
+      #
+      #      - name: Terraform Init
+      #        working-directory: tf
+      #        run: terraform init
+      #
+      #      - name: Terraform Plan
+      #        working-directory: tf
+      #        run: terraform plan
+      #
+      #      - name: Terraform Apply
+      #        working-directory: tf
+      #        run: terraform apply -auto-approve
 
       - name: Deploy to S3
         working-directory: tf
         run: |
           aws s3 sync ../frontend/dist/ s3://$(terraform output -raw website_bucket_name)
-          aws cloudfront create-invalidation --distribution-id $(terraform output -raw cloudfront_distribution_id) --paths "/*" 
+          aws cloudfront create-invalidation --distribution-id $(terraform output -raw cloudfront_distribution_id) --paths "/*"
