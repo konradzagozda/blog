@@ -1,4 +1,4 @@
-# Personal Website
+# Blog
 
 This repository powers my website at [kzagozda.me](https://kzagozda.me)
 
