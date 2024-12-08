@@ -6,12 +6,12 @@ This repository powers my website at [kzagozda.me](https://kzagozda.me)
 
 ![Architecture Diagram](docs/images/architecture.png)
 
-The site architecture consists of:
+The website architecture consists of:
 
 - **Frontend**: React-based static website
 - **CMS**: Contentful headless CMS for content management
 - **Hosting**: AWS S3 static website hosting
-- **CDN**: Amazon CloudFront with ACM SSL certificates
+- **CDN**: Amazon CloudFront with ACM SSL certificate
 - **Infrastructure**: Managed via Terraform
 - **CI/CD**: Automated deployments using GitHub Actions
 
