@@ -100,18 +100,22 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         {items.map((item, index) => (
           <TimelineItem
             key={`${item.title}-${index}`}
-            sx={getItemSx(item)}
+            sx={{
+              ...getItemSx(item),
+              minHeight: "100px",
+              "&::before": {
+                padding: "6px 16px",
+              },
+            }}
             onClick={() => handleItemClick(item)}
           >
             <TimelineOppositeContent
               sx={{
-                m: "auto 0",
-                ...(index === 0 && {
-                  mt: 1.5, // Reduced from 0.5 to 0.25 for finer alignment
-                }),
-                ...(index === items.length - 1 && {
-                  mb: 2.2, // Add bottom margin for last item
-                }),
+                padding: "6px 16px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: index % 2 === 0 ? "flex-end" : "flex-start",
+                margin: 0,
               }}
               variant="body2"
               color="text.secondary"
@@ -119,25 +123,27 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               {item.date}
             </TimelineOppositeContent>
             <TimelineSeparator>
-              {index !== 0 && <TimelineConnector />}
+              <TimelineConnector 
+                sx={{
+                  visibility: index === 0 ? "hidden" : "visible",
+                }} 
+              />
               <TimelineDot sx={getDotStyles(item.type)}>
                 {getIcon(item.type)}
               </TimelineDot>
-              {index !== items.length - 1 && <TimelineConnector />}
+              <TimelineConnector 
+                sx={{
+                  visibility: index === items.length - 1 ? "hidden" : "visible",
+                }}
+              />
             </TimelineSeparator>
             <TimelineContent
               sx={{
-                py: "12px",
-                px: 2,
+                padding: "6px 16px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: item.description ? "flex-start" : "center",
-                minHeight: 40,
-                maxWidth: "500px",
-                overflowWrap: "break-word",
-                wordWrap: "break-word",
-                wordBreak: "break-word",
-                hyphens: "auto",
+                justifyContent: "center",
+                margin: 0,
               }}
             >
               <Typography
@@ -145,25 +151,13 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 component="h5"
                 sx={{
                   color: "text.primary",
-                  mb: 1,
-                  overflowWrap: "break-word",
-                  wordWrap: "break-word",
-                  wordBreak: "break-word",
-                  hyphens: "auto",
+                  mb: item.description ? 1 : 0,
                 }}
               >
                 {item.title}
               </Typography>
               {item.description && (
-                <Typography
-                  color="text.secondary"
-                  sx={{
-                    overflowWrap: "break-word",
-                    wordWrap: "break-word",
-                    wordBreak: "break-word",
-                    hyphens: "auto",
-                  }}
-                >
+                <Typography color="text.secondary">
                   {item.description}
                 </Typography>
               )}
@@ -211,11 +205,19 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               {item.date}
             </TimelineOppositeContent>
             <TimelineSeparator>
-              {index !== 0 && <TimelineConnector />}
+              <TimelineConnector 
+                sx={{
+                  visibility: index === 0 ? "hidden" : "visible",
+                }} 
+              />
               <TimelineDot sx={getDotStyles(item.type)}>
                 {getIcon(item.type)}
               </TimelineDot>
-              {index !== items.length - 1 && <TimelineConnector />}
+              <TimelineConnector 
+                sx={{
+                  visibility: index === items.length - 1 ? "hidden" : "visible",
+                }}
+              />
             </TimelineSeparator>
             <TimelineContent
               sx={{
