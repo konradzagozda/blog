@@ -1,6 +1,6 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Container, IconButton, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ComponentPropsWithoutRef, type ReactElement } from "react";
 import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -117,8 +117,11 @@ export function Article({ article }: ArticleProps): ReactElement {
                   {children}
                 </Typography>
               ),
-              code({ inline, className, children }) {
-                const match = /language-(\w+)/.exec(className || "");
+              code: function Code(
+                props: ComponentPropsWithoutRef<"code"> & { inline?: boolean }
+              ) {
+                const { inline, className, children } = props;
+                const match = /language-(\w+)/.exec(className ?? "");
                 const lang = match ? match[1] : "";
 
                 if (!inline && lang) {
@@ -142,7 +145,6 @@ export function Article({ article }: ArticleProps): ReactElement {
                     </SyntaxHighlighter>
                   );
                 }
-
                 return <code className={className}>{children}</code>;
               },
             }}
