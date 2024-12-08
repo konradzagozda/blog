@@ -19,15 +19,19 @@ The website architecture consists of:
 
 ### Mobile
 
+![Mobile Timeline](docs/images/mobile_timeline.png)
+
+![Mobile Article](docs/images/mobile_article.png)
+
 ### Tablet
+
+![Tablet Timeline](docs/images/tablet_timeline.png)
+
+![Tablet Article](docs/images/tablet_article.png)
 
 ### Desktop
 
-#### Timeline
-
 ![Desktop Timeline](docs/images/desktop_timeline.png)
-
-#### Article
 
 ![Desktop Article](docs/images/desktop_article.png)
 
