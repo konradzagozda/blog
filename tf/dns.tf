@@ -1,12 +1,12 @@
 # Get the hosted zone
 data "aws_route53_zone" "domain" {
-  name = "kzagozda.me"
+  name = var.domain_name
 }
 
 # Create SSL certificate
 resource "aws_acm_certificate" "cert" {
-  domain_name               = "kzagozda.me"
-  subject_alternative_names = ["*.kzagozda.me"]
+  domain_name               = var.domain_name
+  subject_alternative_names = ["*.${var.domain_name}"]
   validation_method         = "DNS"
 
   lifecycle {
@@ -41,25 +41,12 @@ resource "aws_acm_certificate_validation" "cert" {
 # Create Route53 record for the domain
 resource "aws_route53_record" "website" {
   zone_id = data.aws_route53_zone.domain.zone_id
-  name    = "kzagozda.me"
+  name    = var.domain_name
   type    = "A"
 
   alias {
     name                   = aws_cloudfront_distribution.website_distribution.domain_name
-    zone_id               = aws_cloudfront_distribution.website_distribution.hosted_zone_id
-    evaluate_target_health = false
-  }
-}
-
-# Create www subdomain record
-resource "aws_route53_record" "www" {
-  zone_id = data.aws_route53_zone.domain.zone_id
-  name    = "www.kzagozda.me"
-  type    = "A"
-
-  alias {
-    name                   = aws_cloudfront_distribution.website_distribution.domain_name
-    zone_id               = aws_cloudfront_distribution.website_distribution.hosted_zone_id
+    zone_id                = aws_cloudfront_distribution.website_distribution.hosted_zone_id
     evaluate_target_health = false
   }
 } 

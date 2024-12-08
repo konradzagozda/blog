@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.9.0"
-  
+
   backend "s3" {
     bucket         = "konradzagozda-terraform-state"
     key            = "terraform.tfstate"
@@ -19,6 +19,14 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+
+  default_tags {
+    tags = {
+      Environment = "Production"
+      Project     = "Personal Website"
+      Terraform   = "true"
+    }
+  }
 }
 
 # S3 bucket for website hosting
@@ -47,8 +55,8 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowCloudFrontAccess"
-        Effect    = "Allow"
+        Sid    = "AllowCloudFrontAccess"
+        Effect = "Allow"
         Principal = {
           Service = "cloudfront.amazonaws.com"
         }
@@ -67,14 +75,14 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "website_distribution" {
   enabled             = true
-  is_ipv6_enabled    = true
+  is_ipv6_enabled     = true
   default_root_object = "index.html"
-  price_class        = "PriceClass_100"
+  price_class         = "PriceClass_100"
 
   origin {
     domain_name              = aws_s3_bucket.website_bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.default.id
-    origin_id               = local.s3_origin_id
+    origin_id                = local.s3_origin_id
   }
 
   default_cache_behavior {
@@ -102,8 +110,8 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.cert.arn
-    ssl_support_method  = "sni-only"
+    acm_certificate_arn      = aws_acm_certificate.cert.arn
+    ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
 
@@ -113,7 +121,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     response_page_path = "/index.html"
   }
 
-  aliases = ["kzagozda.me"]
+  aliases = [var.domain_name]
 }
 
 # CloudFront Origin Access Control
@@ -128,4 +136,43 @@ resource "aws_cloudfront_origin_access_control" "default" {
 locals {
   s3_origin_id = "website_s3_origin"
 }
- 
+
+resource "aws_s3_bucket_versioning" "website_bucket" {
+  bucket = aws_s3_bucket.website_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_cors_configuration" "website_bucket" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["https://${var.domain_name}"]
+    max_age_seconds = 3600
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "website_bucket" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  rule {
+    id     = "cleanup_old_versions"
+    status = "Enabled"
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
+    }
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "website_bucket" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
