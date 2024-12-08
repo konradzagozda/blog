@@ -141,16 +141,17 @@ export function App(): ReactElement {
           flexDirection: "column",
           margin: 0,
           padding: 0,
+          overflow: "hidden",
         }}
       >
-        <Header />
         <Box
           sx={{
             flex: 1,
+            overflow: "auto",
             position: "relative",
-            overflow: "hidden",
           }}
         >
+          <Header />
           <AnimatedRoutes items={items} />
         </Box>
         <BuiltWith />

@@ -203,12 +203,13 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 position: "absolute",
                 left: "-100px",
                 top: "20px",
-                fontSize: "0.8125rem",
+                fontSize: "0.7125rem !important",
+                whiteSpace: "nowrap",
               }}
               variant="body2"
               color="text.secondary"
             >
-              {item.date}
+              {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector
