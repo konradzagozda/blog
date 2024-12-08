@@ -18,7 +18,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
 
 # S3 bucket for website hosting
@@ -102,7 +102,9 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.cert.arn
+    ssl_support_method  = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   custom_error_response {
@@ -110,6 +112,8 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     response_code      = 200
     response_page_path = "/index.html"
   }
+
+  aliases = ["kzagozda.me"]
 }
 
 # CloudFront Origin Access Control
@@ -123,4 +127,5 @@ resource "aws_cloudfront_origin_access_control" "default" {
 
 locals {
   s3_origin_id = "website_s3_origin"
-} 
+}
+ 
