@@ -90,7 +90,7 @@ export function Header(): ReactElement {
           style={{
             position: "absolute",
             right: 16,
-            top: 16,
+            top: 34,
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",
@@ -122,38 +122,39 @@ export function Header(): ReactElement {
 
       {/* Tablet Layout */}
       {isTablet ? (
-        <Box sx={{ 
-          maxWidth: 800, 
-          width: "100%", 
-          margin: "0 auto", 
-          position: "relative",
-          display: "grid",
-          gridTemplateColumns: "70% 30%",
-          gridTemplateRows: "auto auto",
-          gap: 0,
-          px: 0,
-          py: 2
-        }}>
+        <Box
+          sx={{
+            maxWidth: 800,
+            width: "100%",
+            margin: "0 auto",
+            position: "relative",
+            display: "grid",
+            gridTemplateColumns: "70% 30%",
+            gridTemplateRows: "auto auto",
+            gap: 0,
+            px: 0,
+            py: 2,
+          }}
+        >
           {/* Top Left */}
-          <Box sx={{ 
-            gridColumn: "1 / 2",
-            gridRow: "1 / 2",
-            pl: 3,
-            display: "flex", 
-            alignItems: "center", 
-            gap: 1 
-          }}>
-            <Typography 
-              variant="body1" 
-              color="text.secondary"
-            >
+          <Box
+            sx={{
+              gridColumn: "1 / 2",
+              gridRow: "1 / 2",
+              pl: 3,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <Typography variant="body1" color="text.secondary">
               Hello! 👋 I&apos;m
             </Typography>
-            <Typography 
-              variant="h4" 
+            <Typography
+              variant="h4"
               color="text.primary"
               sx={{
-                fontSize: "1.75rem"
+                fontSize: "1.75rem",
               }}
             >
               Konrad Zagozda
@@ -161,31 +162,35 @@ export function Header(): ReactElement {
           </Box>
 
           {/* Top Right */}
-          <Box sx={{ 
-            gridColumn: "2 / 3",
-            gridRow: "1 / 2",
-            display: "flex",
-            justifyContent: "flex-end",
-            pr: 2,
-            mr: "-12px",
-            mb: 1
-          }}>
+          <Box
+            sx={{
+              gridColumn: "2 / 3",
+              gridRow: "1 / 2",
+              display: "flex",
+              justifyContent: "flex-end",
+              pr: 2,
+              mr: "-12px",
+              mb: 1,
+            }}
+          >
             {socialIcons}
           </Box>
 
           {/* Bottom Left */}
-          <Box sx={{ 
-            gridColumn: "1 / 2",
-            gridRow: "2 / 3",
-            pl: 3,
-            mt: -0.5
-          }}>
-            <Typography 
-              variant="body1" 
+          <Box
+            sx={{
+              gridColumn: "1 / 2",
+              gridRow: "2 / 3",
+              pl: 3,
+              mt: -0.5,
+            }}
+          >
+            <Typography
+              variant="body1"
               color="text.secondary"
-              sx={{ 
+              sx={{
                 whiteSpace: "nowrap",
-                maxWidth: "500px"
+                maxWidth: "500px",
               }}
             >
               Here, I explore things, sharing thoughts along the way.
@@ -193,23 +198,25 @@ export function Header(): ReactElement {
           </Box>
 
           {/* Bottom Right */}
-          <Box sx={{ 
-            gridColumn: "2 / 3",
-            gridRow: "2 / 3",
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            pr: 2,
-            mr: "-12px",
-            mt: -0.5
-          }}>
+          <Box
+            sx={{
+              gridColumn: "2 / 3",
+              gridRow: "2 / 3",
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              pr: 2,
+              mr: "-12px",
+              mt: -0.5,
+            }}
+          >
             <Typography
               variant="body2"
               color="text.secondary"
               sx={{
                 fontSize: "0.875rem",
                 whiteSpace: "nowrap",
-                pr: 1.5
+                pr: 1.5,
               }}
             >
               Connect with me 👆
