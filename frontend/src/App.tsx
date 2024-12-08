@@ -142,6 +142,7 @@ export function App(): ReactElement {
           margin: 0,
           padding: 0,
           overflow: "hidden",
+          paddingRight: "calc(100vw - 100%)",
         }}
       >
         <Box
@@ -149,10 +150,13 @@ export function App(): ReactElement {
             flex: 1,
             overflow: "auto",
             position: "relative",
+            overflowY: "scroll",
           }}
         >
           <Header />
-          <AnimatedRoutes items={items} />
+          <Box sx={{ minHeight: 0 }}>
+            <AnimatedRoutes items={items} />
+          </Box>
         </Box>
         <BuiltWith />
       </Box>

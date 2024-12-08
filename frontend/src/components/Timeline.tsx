@@ -91,9 +91,9 @@ export function Timeline({ items }: TimelineProps): ReactElement {
             fontSize: "1.2rem",
             color: "text.secondary",
             opacity: 0.7,
-            display: { xs: "none", sm: "block" }
-          }
-        })
+            display: { xs: "none", sm: "block" },
+          },
+        }),
       };
     }
     return undefined;
@@ -226,7 +226,10 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               variant="body2"
               color="text.secondary"
             >
-              {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              {new Date(item.date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector
