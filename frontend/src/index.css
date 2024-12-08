@@ -160,5 +160,11 @@ h6, .MuiTypography-h6 {
     border-radius: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    font-size: 0.7rem !important; /* ~11px for better readability */
+  }
+
+  /* Ensure code content is properly sized */
+  pre code, pre span {
+    font-size: 0.7rem !important;
   }
 }

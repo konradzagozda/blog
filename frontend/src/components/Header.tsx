@@ -90,7 +90,7 @@ export function Header(): ReactElement {
           style={{
             position: "absolute",
             right: 16,
-            top: 34,
+            top: 14,
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",

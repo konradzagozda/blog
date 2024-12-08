@@ -135,6 +135,7 @@ export function Article({ article }: ArticleProps): ReactElement {
                         margin: "1.5em 0",
                         borderRadius: "8px",
                         fontFamily: CODE_FONTS,
+                        padding: "1em 0.75em"
                       }}
                       codeTagProps={{
                         style: {
