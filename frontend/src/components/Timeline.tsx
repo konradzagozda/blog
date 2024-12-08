@@ -90,7 +90,8 @@ export function Timeline({ items }: TimelineProps): ReactElement {
             right: "16px",
             fontSize: "1.2rem",
             color: "text.secondary",
-            opacity: 0.7
+            opacity: 0.7,
+            display: { xs: "none", sm: "block" }
           }
         })
       };
@@ -220,7 +221,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
-                height: "40px"
+                height: "40px",
               }}
               variant="body2"
               color="text.secondary"
