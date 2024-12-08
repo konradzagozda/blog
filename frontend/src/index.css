@@ -141,4 +141,24 @@ h6, .MuiTypography-h6 {
   p, span, div:not(pre div), li, a {
     font-size: 0.875rem !important;   /* 14px */
   }
+
+  /* Full-width code blocks on mobile */
+  pre {
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-radius: 0 !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    max-width: none !important;
+  }
+
+  pre > div {
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }

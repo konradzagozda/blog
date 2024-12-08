@@ -230,16 +230,16 @@ export function Header(): ReactElement {
             maxWidth: 600,
             width: "100%",
             margin: "0 auto",
-            padding: "16px 0",
+            padding: "4px 0",
             overflow: "hidden",
           }}
         >
           <div
             style={{
               textAlign: "center",
-              marginTop: "16px",
+              marginTop: "4px",
               maxWidth: "100%",
-              padding: "0 24px",
+              padding: "0 12px",
             }}
           >
             <Box
@@ -247,8 +247,8 @@ export function Header(): ReactElement {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 1,
-                mb: 1.5,
+                gap: 0.25,
+                mb: 0.5,
               }}
             >
               <Typography

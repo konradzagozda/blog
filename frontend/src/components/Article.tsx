@@ -68,7 +68,7 @@ export function Article({ article }: ArticleProps): ReactElement {
           </Typography>
         </Box>
 
-        <Box sx={{ px: { xs: 2, md: 0 } }}>
+        <Box sx={{ px: { xs: 0, md: 0 } }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
