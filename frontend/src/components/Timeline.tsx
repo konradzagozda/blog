@@ -144,6 +144,8 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 flexDirection: "column",
                 justifyContent: "center",
                 margin: 0,
+                minWidth: 0,
+                flex: 1
               }}
             >
               <Typography
@@ -152,6 +154,10 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 sx={{
                   color: "text.primary",
                   mb: item.description ? 1 : 0,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  minWidth: 0
                 }}
               >
                 {item.title}
@@ -228,11 +234,8 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 justifyContent: item.description ? "flex-start" : "center",
                 minHeight: 40,
                 maxWidth: "600px",
-                overflowWrap: "break-word",
-                wordWrap: "break-word",
-                wordBreak: "break-word",
-                hyphens: "auto",
-                ml: 2,
+                minWidth: 0,
+                flex: 1
               }}
             >
               <Typography
@@ -241,10 +244,10 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 sx={{
                   color: "text.primary",
                   mb: 1,
-                  overflowWrap: "break-word",
-                  wordWrap: "break-word",
-                  wordBreak: "break-word",
-                  hyphens: "auto",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  minWidth: 0
                 }}
               >
                 {item.title}
