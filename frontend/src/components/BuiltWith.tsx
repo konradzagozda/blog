@@ -41,6 +41,7 @@ export function BuiltWith(): ReactElement {
           mt: isMobile ? 1 : 0,
           writingMode: isMobile ? "vertical-rl" : "horizontal-tb",
           transform: isMobile ? "rotate(180deg)" : "none",
+          whiteSpace: "nowrap",
         }}
       >
         built with
