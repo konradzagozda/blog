@@ -12,13 +12,14 @@ import { Typography } from "@mui/material";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { slugify } from "../utils/slugify";
+import { Document } from "@contentful/rich-text-types";
 
 interface TimelineItemData {
   date: string;
   title: string;
   description?: string;
   type: "article" | "project" | "celebration";
-  content?: string; // For articles
+  content?: string | Document;
   link?: string; // For projects
 }
 

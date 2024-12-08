@@ -4,8 +4,11 @@
 cd ../frontend
 yarn build
 
+# Return to terraform directory
+cd ../tf
+
 # Sync the build folder with S3
-aws s3 sync build/ s3://$(terraform output -raw website_bucket_name)
+aws s3 sync ../frontend/build/ s3://$(terraform output -raw website_bucket_name)
 
 # Invalidate CloudFront cache
 aws cloudfront create-invalidation --distribution-id $(terraform output -raw cloudfront_distribution_id) --paths "/*" 

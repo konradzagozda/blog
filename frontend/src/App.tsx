@@ -1,5 +1,6 @@
 import { Document } from "@contentful/rich-text-types";
-import { Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import { Entry } from "contentful";
 import { useEffect, useState, type ReactElement } from "react";
 import {
   BrowserRouter,
@@ -44,6 +45,18 @@ interface CelebrationItem extends BaseTimelineItem {
 
 // Union type for all possible timeline items
 type TimelineItem = ArticleItem | ProjectItem | CelebrationItem;
+
+// Add these type definitions at the top with your other interfaces
+interface BlogEntry {
+  fields: {
+    date: string;
+    title: string;
+    type: "article" | "project" | "celebration";
+    description?: string;
+    content?: Document | string;
+    link?: string;
+  };
+}
 
 function ArticleRoute({ items }: { items: TimelineItem[] }) {
   const { id } = useParams();
@@ -122,9 +135,9 @@ export function App(): ReactElement {
               }),
               ...(entry.fields.content && { content: entry.fields.content }),
               ...(entry.fields.link && { link: entry.fields.link }),
-            };
+            } as TimelineItem;
           }
-        ) as TimelineItem[];
+        );
         setItems(transformedItems);
       })
       .catch((error) => console.error("Error fetching blog entries:", error));

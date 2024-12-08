@@ -2,10 +2,10 @@ terraform {
   required_version = ">= 1.9.0"
   
   backend "s3" {
-    bucket         = "your-tf-state-bucket-name"
+    bucket         = "konradzagozda-terraform-state"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-state-lock"
+    dynamodb_table = "konradzagozda-terraform-lock"
     encrypt        = true
   }
 
