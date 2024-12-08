@@ -124,6 +124,7 @@ export function App(): ReactElement {
             } as TimelineItem & { rawDate: Date };
           })
           .sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime())
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .map(({ rawDate, ...item }) => item);
 
         setItems(transformedItems);
