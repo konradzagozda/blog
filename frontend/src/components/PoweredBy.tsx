@@ -8,6 +8,7 @@ import {
 import { type ReactElement } from "react";
 import awsLogo from "../assets/aws.svg";
 import contentfulLogo from "../assets/contentful.svg";
+import githubLogo from "../assets/github.svg";
 import reactLogo from "../assets/react.svg";
 
 export function PoweredBy(): ReactElement {
@@ -52,13 +53,6 @@ export function PoweredBy(): ReactElement {
           alignItems: "center",
         }}
       >
-        <Tooltip title="AWS" arrow placement={isMobile ? "left" : "top"}>
-          <img
-            src={awsLogo}
-            alt="AWS"
-            style={{ height: 20, width: "auto", cursor: "pointer" }}
-          />
-        </Tooltip>
         <Tooltip title="React" arrow placement={isMobile ? "left" : "top"}>
           <img
             src={reactLogo}
@@ -70,6 +64,24 @@ export function PoweredBy(): ReactElement {
           <img
             src={contentfulLogo}
             alt="Contentful"
+            style={{ height: 20, width: "auto", cursor: "pointer" }}
+          />
+        </Tooltip>
+        <Tooltip
+          title="GitHub Actions"
+          arrow
+          placement={isMobile ? "left" : "top"}
+        >
+          <img
+            src={githubLogo}
+            alt="GitHubActions"
+            style={{ height: 20, width: "auto", cursor: "pointer" }}
+          />
+        </Tooltip>
+        <Tooltip title="AWS" arrow placement={isMobile ? "left" : "top"}>
+          <img
+            src={awsLogo}
+            alt="AWS"
             style={{ height: 20, width: "auto", cursor: "pointer" }}
           />
         </Tooltip>
