@@ -204,19 +204,23 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               sx={{
                 m: "auto 0",
                 ...(index === 0 && {
-                  mt: -3,
+                  mt: 0,
                 }),
                 ...(index === items.length - 1 && {
-                  mt: -2.5,
+                  mt: 0,
                 }),
-                transform: "rotate(-40deg)",
-                transformOrigin: "right center",
-                width: "90px",
+                width: "60px",
                 position: "absolute",
-                left: "-100px",
-                top: "20px",
+                left: "-70px",
+                top: "50%",
+                transform: "translateY(-50%)",
                 fontSize: "0.7125rem !important",
                 whiteSpace: "nowrap",
+                textAlign: "right",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                height: "40px"
               }}
               variant="body2"
               color="text.secondary"
