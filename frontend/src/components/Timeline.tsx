@@ -81,6 +81,18 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         "&:hover": {
           bgcolor: "rgba(0, 0, 0, 0.03)",
         },
+        ...(item.type === "project" && {
+          position: "relative",
+          "&::after": {
+            content: '"↗"',
+            position: "absolute",
+            top: "8px",
+            right: "16px",
+            fontSize: "1.2rem",
+            color: "text.secondary",
+            opacity: 0.7
+          }
+        })
       };
     }
     return undefined;
