@@ -15,7 +15,7 @@ The website architecture consists of:
 - **Infrastructure**: Managed via Terraform
 - **CI/CD**: Automated deployments using GitHub Actions
 
-## Views
+## Responsive Views
 
 ### Mobile
 
