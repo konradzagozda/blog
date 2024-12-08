@@ -14,6 +14,8 @@ export function Header(): ReactElement {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
+  const DESCRIPTION_TEXT = "and this is a site for my projects, ideas, and things I'm exploring in technology.";
+
   const socialIcons = (
     <div style={{ display: "flex", gap: "3px" }}>
       <IconButton
@@ -193,7 +195,7 @@ export function Header(): ReactElement {
                 maxWidth: "500px",
               }}
             >
-              Here, I explore things, sharing thoughts along the way.
+              {DESCRIPTION_TEXT}
             </Typography>
           </Box>
 
@@ -230,7 +232,7 @@ export function Header(): ReactElement {
             maxWidth: 600,
             width: "100%",
             margin: "0 auto",
-            padding: "4px 0",
+            padding: isMobile ? "4px 0" : "4px 0 24px 0",
             overflow: "hidden",
           }}
         >
@@ -277,16 +279,16 @@ export function Header(): ReactElement {
 
             <Typography
               variant="body1"
+              color="text.secondary"
               sx={{
-                color: "text.secondary",
-                mb: isMobile ? 2 : 0,
-                maxWidth: "600px",
-                mx: "auto",
-                wordBreak: "break-word",
-                mt: 2,
+                textAlign: "center",
+                maxWidth: { xs: "400px", md: "none" },
+                margin: "0 auto",
+                whiteSpace: { xs: "normal", md: "nowrap" },
+                mt: { xs: 0, md: 2 }
               }}
             >
-              Here, I explore things, sharing thoughts along the way.
+              {DESCRIPTION_TEXT}
             </Typography>
 
             {isMobile && (
