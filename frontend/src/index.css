@@ -64,6 +64,7 @@ p, span, div:not(pre div), li, a {
 pre, pre code, code, .prism-code, [class*="language-"], pre div, pre span {
   font-family: 'Source Code Pro', 'JetBrains Mono', 'Fira Code', monospace !important;
   font-weight: 400;
+  font-size: 0.8125rem !important; /* 13px for desktop */
 }
 
 pre {
@@ -160,10 +161,9 @@ h6, .MuiTypography-h6 {
     border-radius: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    font-size: 0.7rem !important; /* ~11px for better readability */
+    font-size: 0.7rem !important;
   }
 
-  /* Ensure code content is properly sized */
   pre code, pre span {
     font-size: 0.7rem !important;
   }

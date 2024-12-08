@@ -35,7 +35,7 @@ export function Article({ article }: ArticleProps): ReactElement {
         px: { xs: 0, md: 2 },
       }}
     >
-      <Container maxWidth="md" sx={{ maxWidth: { xs: "100%", md: "800px" } }}>
+      <Container maxWidth="md" sx={{ maxWidth: { xs: "100%", md: "1040px" } }}>
         <Typography
           variant="h1"
           component="h1"
