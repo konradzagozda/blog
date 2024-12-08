@@ -1,6 +1,6 @@
 # Personal Website
 
-This repository powers my website at <https://kzagozda.me>
+This repository powers my website at [kzagozda.me](https://kzagozda.me)
 
 ## Architecture
 
