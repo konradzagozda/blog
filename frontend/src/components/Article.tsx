@@ -11,16 +11,16 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { type ArticleItem } from "../App";
 
-SyntaxHighlighter.registerLanguage("typescript", typescript);
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("bash", bash);
-
 interface ArticleProps {
   article: ArticleItem;
 }
 
 const CODE_FONTS =
   "'Source Code Pro', 'JetBrains Mono', 'Fira Code', monospace";
+
+SyntaxHighlighter.registerLanguage("typescript", typescript);
+SyntaxHighlighter.registerLanguage("javascript", javascript);
+SyntaxHighlighter.registerLanguage("bash", bash);
 
 export function Article({ article }: ArticleProps): ReactElement {
   const navigate = useNavigate();
@@ -126,6 +126,7 @@ export function Article({ article }: ArticleProps): ReactElement {
 
                 if (!inline && lang) {
                   return (
+                    // @ts-expect-error - known issue with SyntaxHighlighter types
                     <SyntaxHighlighter
                       style={oneDark}
                       language={lang}

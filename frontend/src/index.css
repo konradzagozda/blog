@@ -37,72 +37,22 @@ p, span, div:not(pre div), li, a {
   font-family: 'Nunito', 'Roboto', sans-serif !important;
 }
 
-.cube-enter {
-  opacity: 0;
-  transform: translateY(20px);
+.route-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: slideIn 300ms ease-out;
 }
 
-.cube-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms ease-in, transform 300ms ease-out;
-}
-
-.cube-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.cube-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 300ms ease-in, transform 300ms ease-out;
-}
-
-/* Simple horizontal slide transitions */
-.slide-left-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.slide-left-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all 300ms ease-out;
-}
-
-.slide-left-exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.slide-left-exit-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: all 300ms ease-out;
-}
-
-/* Going back transition */
-.slide-right-enter {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-
-.slide-right-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all 300ms ease-out;
-}
-
-.slide-right-exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.slide-right-exit-active {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 300ms ease-out;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Add these styles for markdown content */

@@ -1,4 +1,10 @@
-import { Box, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { type ReactElement } from "react";
 import awsLogo from "../assets/aws.svg";
 import contentfulLogo from "../assets/contentful.svg";
@@ -25,10 +31,10 @@ export function PoweredBy(): ReactElement {
         },
       }}
     >
-      <Typography 
-        variant="body2" 
+      <Typography
+        variant="body2"
         color="text.secondary"
-        sx={{ 
+        sx={{
           fontSize: "0.875rem",
           mr: isMobile ? 0 : 1,
           mt: isMobile ? 1 : 0,
