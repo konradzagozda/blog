@@ -19,12 +19,12 @@ export function BuiltWith(): ReactElement {
     <Box
       sx={{
         position: "fixed",
-        bottom: isMobile ? 16 : 16,
+        bottom: 16,
         right: isMobile ? 8 : 26,
         display: "flex",
-        flexDirection: isMobile ? "column-reverse" : "row",
-        alignItems: isMobile ? "flex-end" : "center",
-        gap: isMobile ? 1 : 2,
+        flexDirection: "column-reverse",
+        alignItems: "flex-end",
+        gap: 1,
         opacity: 0.7,
         transition: "opacity 0.2s ease-in-out",
         "&:hover": {
@@ -37,11 +37,10 @@ export function BuiltWith(): ReactElement {
         color="text.secondary"
         sx={{
           fontSize: "0.875rem",
-          mr: isMobile ? 0 : 1,
-          mt: isMobile ? 1 : 0,
-          writingMode: isMobile ? "vertical-rl" : "horizontal-tb",
-          transform: isMobile ? "rotate(180deg)" : "none",
+          writingMode: "vertical-rl",
+          transform: "rotate(180deg)",
           whiteSpace: "nowrap",
+          mt: 1,
         }}
       >
         built with
@@ -49,37 +48,33 @@ export function BuiltWith(): ReactElement {
       <Box
         sx={{
           display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          gap: isMobile ? 1 : 2,
+          flexDirection: "column",
+          gap: 1,
           alignItems: "center",
         }}
       >
-        <Tooltip title="React" arrow placement={isMobile ? "left" : "top"}>
+        <Tooltip title="React" arrow placement="left">
           <img
             src={reactLogo}
             alt="React"
             style={{ height: 20, width: "auto", cursor: "pointer" }}
           />
         </Tooltip>
-        <Tooltip title="Contentful" arrow placement={isMobile ? "left" : "top"}>
+        <Tooltip title="Contentful" arrow placement="left">
           <img
             src={contentfulLogo}
             alt="Contentful"
             style={{ height: 20, width: "auto", cursor: "pointer" }}
           />
         </Tooltip>
-        <Tooltip
-          title="GitHub Actions"
-          arrow
-          placement={isMobile ? "left" : "top"}
-        >
+        <Tooltip title="GitHub Actions" arrow placement="left">
           <img
             src={githubLogo}
             alt="GitHubActions"
             style={{ height: 20, width: "auto", cursor: "pointer" }}
           />
         </Tooltip>
-        <Tooltip title="AWS" arrow placement={isMobile ? "left" : "top"}>
+        <Tooltip title="AWS" arrow placement="left">
           <img
             src={awsLogo}
             alt="AWS"
