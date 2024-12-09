@@ -29,8 +29,8 @@ resource "aws_route53_record" "cert_validation" {
       type   = dvo.resource_record_type
       # Determine which domain this validation record belongs to
       domain = (
-        contains(var.alternate_domain_names, regex("([^.]+\\.[^.]+)$", dvo.domain_name)[0]) ? 
-        regex("([^.]+\\.[^.]+)$", dvo.domain_name)[0] : 
+        contains(var.alternate_domain_names, regex("([^.]+\\.[^.]+)$", dvo.domain_name)[0]) ?
+        regex("([^.]+\\.[^.]+)$", dvo.domain_name)[0] :
         var.domain_name
       )
     }
@@ -42,8 +42,8 @@ resource "aws_route53_record" "cert_validation" {
   ttl             = 60
   type            = each.value.type
   zone_id = (
-    each.value.domain == var.domain_name ? 
-    data.aws_route53_zone.domain.zone_id : 
+    each.value.domain == var.domain_name ?
+    data.aws_route53_zone.domain.zone_id :
     data.aws_route53_zone.alternate_domains[each.value.domain].zone_id
   )
 }
