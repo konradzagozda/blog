@@ -15,6 +15,29 @@ The website architecture consists of:
 - **Infrastructure**: Managed via Terraform
 - **CI/CD**: Automated deployments using GitHub Actions
 
+## Cost Analysis
+
+The infrastructure costs are kept minimal:
+
+### Static Storage & Hosting
+
+- **ACM Certificate**: Free
+- **S3 Buckets**:
+  - Main website bucket: ~$0.00046/month (20MB storage)
+  - Redirect bucket: Free
+
+### Domain & DNS (Route53)
+
+- **Domain Registration**: $28 / year (for 2 domains)
+- **Hosted Zones**: $1 / month (for 2 zones)
+
+### Variable Costs
+
+- CloudFront CDN traffic (pay per use)
+- DNS query costs (pay per use)
+
+> **Note**: The total fixed costs are $3.33046 / month plus minimal variable costs for actual traffic.
+
 ## Responsive Views
 
 ### Mobile
