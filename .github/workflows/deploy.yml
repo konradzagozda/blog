@@ -49,10 +49,10 @@ jobs:
         working-directory: tf
         run: terraform validate
 
-      #      - name: Terraform Plan
-      #        working-directory: tf
-      #        run: terraform plan
-      #
+      - name: Terraform Plan
+        working-directory: tf
+        run: terraform plan
+      
       #      - name: Terraform Apply
       #        working-directory: tf
       #        run: terraform apply -auto-approve
