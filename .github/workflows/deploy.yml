@@ -51,11 +51,11 @@ jobs:
 
       - name: Terraform Plan
         working-directory: tf
-        run: terraform plan
+        run: terraform plan -out=tfplan
       
-      #      - name: Terraform Apply
-      #        working-directory: tf
-      #        run: terraform apply -auto-approve
+      - name: Terraform Apply
+        working-directory: tf
+        run: terraform apply tfplan
 
       - name: Deploy to S3
         working-directory: tf
