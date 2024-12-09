@@ -121,7 +121,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     response_page_path = "/index.html"
   }
 
-  aliases = [var.domain_name]
+  aliases = concat([var.domain_name], ["www.${var.domain_name}"])
 }
 
 # CloudFront Origin Access Control
@@ -175,4 +175,74 @@ resource "aws_s3_bucket_public_access_block" "website_bucket" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+# S3 buckets for redirect domains
+resource "aws_s3_bucket" "redirect_buckets" {
+  for_each = toset(var.alternate_domain_names)
+  bucket   = "redirect-${each.value}"
+}
+
+# Configure redirect buckets for website hosting
+resource "aws_s3_bucket_website_configuration" "redirect_config" {
+  for_each = toset(var.alternate_domain_names)
+  bucket   = aws_s3_bucket.redirect_buckets[each.value].id
+
+  redirect_all_requests_to {
+    host_name = var.domain_name
+    protocol  = "https"
+  }
+}
+
+# CloudFront distributions for redirect domains
+resource "aws_cloudfront_distribution" "redirect_distribution" {
+  for_each = toset(var.alternate_domain_names)
+
+  enabled         = true
+  is_ipv6_enabled = true
+  price_class     = "PriceClass_100"
+
+  origin {
+    domain_name = aws_s3_bucket_website_configuration.redirect_config[each.value].website_endpoint
+    origin_id   = "S3-${each.value}"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  default_cache_behavior {
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD"]
+    target_origin_id       = "S3-${each.value}"
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+
+    min_ttl     = 0
+    default_ttl = 3600
+    max_ttl     = 86400
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    acm_certificate_arn      = aws_acm_certificate.cert.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
+  }
+
+  aliases = [each.value, "www.${each.value}"]
 }
