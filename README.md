@@ -1,6 +1,7 @@
 # Blog
 
-This repository powers my website at [kzagozda.me](https://kzagozda.me)
+This repository powers my website at [zagozdakonrad.com](https://zagozdakonrad.com)
+There are additional domain: [konradzagozda.com](https://konradzagozda.com) that will redirect to the main domain.
 
 ## Architecture
 
