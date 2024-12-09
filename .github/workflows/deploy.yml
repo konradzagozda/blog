@@ -37,6 +37,19 @@ jobs:
         with:
           terraform_version: "1.9.0"
 
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.50.3
+
+      - name: Initialize TFLint
+        working-directory: tf
+        run: tflint --init
+        
+      - name: Run TFLint
+        working-directory: tf
+        run: tflint -f compact
+
       - name: Terraform Format Check
         working-directory: tf
         run: terraform fmt -check
