@@ -58,15 +58,6 @@ The infrastructure costs are kept minimal:
 
 ![Desktop Article](docs/images/desktop_article.png)
 
-## Infrastructure
-
-The infrastructure is managed using Terraform and includes:
-
-- S3 bucket for static website hosting
-- CloudFront distribution for content delivery
-- ACM certificate for HTTPS
-- Required IAM roles and policies
-
 ## CI/CD & Deployment
 
 The site uses GitHub Actions for continuous integration and deployment. When changes are pushed to the main branch, the pipeline automatically:
