@@ -10,6 +10,7 @@ import awsLogo from "../assets/aws.svg";
 import contentfulLogo from "../assets/contentful.svg";
 import githubLogo from "../assets/github.svg";
 import reactLogo from "../assets/react.svg";
+import terraformLogo from "../assets/terraform.svg";
 
 export function BuiltWith(): ReactElement {
   const theme = useTheme();
@@ -36,7 +37,7 @@ export function BuiltWith(): ReactElement {
         variant="body2"
         color="text.secondary"
         sx={{
-          fontSize: "0.875rem",
+          fontSize: "0.875rem !important",
           writingMode: "vertical-rl",
           transform: "rotate(180deg)",
           whiteSpace: "nowrap",
@@ -53,6 +54,20 @@ export function BuiltWith(): ReactElement {
           alignItems: "center",
         }}
       >
+        <Tooltip title="AWS" arrow placement="left">
+          <img
+            src={awsLogo}
+            alt="AWS"
+            style={{ height: 20, width: "auto", cursor: "pointer" }}
+          />
+        </Tooltip>
+        <Tooltip title="Terraform" arrow placement="left">
+          <img
+            src={terraformLogo}
+            alt="Terraform"
+            style={{ height: 20, width: "auto", cursor: "pointer" }}
+          />
+        </Tooltip>
         <Tooltip title="React" arrow placement="left">
           <img
             src={reactLogo}
@@ -74,14 +89,21 @@ export function BuiltWith(): ReactElement {
             style={{ height: 20, width: "auto", cursor: "pointer" }}
           />
         </Tooltip>
-        <Tooltip title="AWS" arrow placement="left">
-          <img
-            src={awsLogo}
-            alt="AWS"
-            style={{ height: 20, width: "auto", cursor: "pointer" }}
-          />
-        </Tooltip>
       </Box>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{
+          fontSize: "0.875rem !important",
+          writingMode: "vertical-rl",
+          transform: "rotate(180deg)",
+          whiteSpace: "nowrap",
+          mt: 1,
+          mb: 1,
+        }}
+      >
+        by Konrad © 2024
+      </Typography>
     </Box>
   );
 }
