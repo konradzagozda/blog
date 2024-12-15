@@ -51,53 +51,51 @@ jobs:
 
       # STAGING DEPLOYMENT
 
-      - name: Configure AWS Credentials
+      - name: STAGING - Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           aws-access-key-id: ${{ secrets.STG_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.STG_AWS_SECRET_ACCESS_KEY }}
-          mask-aws-account-id: true
 
-      - name: Terragrunt Validate Stg
+      - name: STAGING - Terragrunt Validate
         working-directory: tf/environments/stg
         run: terragrunt validate
 
-      - name: Terragrunt Plan Stg
+      - name: STAGING - Terragrunt Plan
         working-directory: tf/environments/stg
         run: terragrunt plan -out=tfplan
 
-      - name: Terragrunt Apply Stg
+      - name: STAGING - Terragrunt Apply
         working-directory: tf/environments/stg
         run: terragrunt apply tfplan
 
-      - name: Deploy Stg
+      - name: STAGING - Deploy
         working-directory: tf
         run: ./deploy.sh stg
       
       # PRODUCTION DEPLOYMENT
 
-      - name: Configure AWS Credentials
+      - name: PRODUCTION - Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          mask-aws-account-id: true
 
-      - name: Terragrunt Validate Prod
+      - name: PRODUCTION - Terragrunt Validate
         working-directory: tf/environments/prod
         run: terragrunt validate
 
-      - name: Terragrunt Plan Prod
+      - name: PRODUCTION - Terragrunt Plan
         working-directory: tf/environments/prod
         run: terragrunt plan -out=tfplan
       
-      # - name: Terragrunt Apply Prod
+      # - name: PRODUCTION - Terragrunt Apply
       #   working-directory: tf/environments/prod
       #   run: terragrunt apply tfplan
 
-      # - name: Deploy Prod
+      # - name: PRODUCTION - Deploy
       #   working-directory: tf
       #   run: ./deploy.sh prod
 
