@@ -45,14 +45,6 @@ jobs:
         working-directory: tf/environments/prod
         run: terragrunt hclfmt --terragrunt-check
 
-      - name: Terragrunt Validate Prod
-        working-directory: tf/environments/prod
-        run: terragrunt validate
-
-      - name: Terragrunt Validate Stg
-        working-directory: tf/environments/stg
-        run: terragrunt validate
-
       - name: Build Frontend
         working-directory: tf
         run: ./build.sh 
@@ -66,6 +58,10 @@ jobs:
           aws-access-key-id: ${{ secrets.STG_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.STG_AWS_SECRET_ACCESS_KEY }}
           mask-aws-account-id: true
+
+      - name: Terragrunt Validate Stg
+        working-directory: tf/environments/stg
+        run: terragrunt validate
 
       - name: Terragrunt Plan Stg
         working-directory: tf/environments/stg
@@ -88,6 +84,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           mask-aws-account-id: true
+
+      - name: Terragrunt Validate Prod
+        working-directory: tf/environments/prod
+        run: terragrunt validate
 
       - name: Terragrunt Plan Prod
         working-directory: tf/environments/prod
