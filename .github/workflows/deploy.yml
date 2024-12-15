@@ -43,7 +43,7 @@ jobs:
 
       - name: Terragrunt Format Check
         working-directory: tf/environments/prod
-        run: terragrunt hclfmt --terragrunt-check
+        run: terragrunt hclfmt --terragrunt-check --terragrunt-non-interactive
 
       - name: Build Frontend
         working-directory: tf
@@ -60,15 +60,15 @@ jobs:
 
       - name: STAGING - Terragrunt Validate
         working-directory: tf/environments/stg
-        run: terragrunt validate
+        run: terragrunt validate --terragrunt-non-interactive
 
       - name: STAGING - Terragrunt Plan
         working-directory: tf/environments/stg
-        run: terragrunt plan -out=tfplan
+        run: terragrunt plan -out=tfplan --terragrunt-non-interactive
 
       - name: STAGING - Terragrunt Apply
         working-directory: tf/environments/stg
-        run: terragrunt apply tfplan
+        run: terragrunt apply tfplan --terragrunt-non-interactive
 
       - name: STAGING - Deploy
         working-directory: tf
@@ -85,15 +85,15 @@ jobs:
 
       - name: PRODUCTION - Terragrunt Validate
         working-directory: tf/environments/prod
-        run: terragrunt validate
+        run: terragrunt validate --terragrunt-non-interactive
 
       - name: PRODUCTION - Terragrunt Plan
         working-directory: tf/environments/prod
-        run: terragrunt plan -out=tfplan
+        run: terragrunt plan -out=tfplan --terragrunt-non-interactive
       
       # - name: PRODUCTION - Terragrunt Apply
       #   working-directory: tf/environments/prod
-      #   run: terragrunt apply tfplan
+      #   run: terragrunt apply tfplan --terragrunt-non-interactive
 
       # - name: PRODUCTION - Deploy
       #   working-directory: tf
