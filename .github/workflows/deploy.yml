@@ -7,6 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -91,6 +94,21 @@ jobs:
         working-directory: tf/environments/prod
         run: terragrunt plan -out=tfplan --terragrunt-non-interactive
       
+      - name: Manual Approval for Production Deploy
+        uses: trstringer/manual-approval@v1.9.1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: konradzagozda
+          minimum-approvals: 1
+          issue-title: "Deploying to Production"
+          issue-body: |
+            A production deployment has been requested.
+            
+            Please review the plan output above and approve or deny this deployment.
+            
+            Approve with: approve, approved, lgtm, yes
+            Deny with: deny, denied, no
+
       - name: PRODUCTION - Terragrunt Apply
         working-directory: tf/environments/prod
         run: terragrunt apply tfplan --terragrunt-non-interactive
