@@ -60,14 +60,25 @@ The infrastructure costs are kept minimal:
 
 ## CI/CD & Deployment
 
-The site uses GitHub Actions for continuous integration and deployment. When changes are pushed to the main branch, the pipeline automatically:
+The site uses GitHub Actions for continuous integration and deployment with two environments:
+
+### Staging
+
+- Automatic deployment on push to main
+- Uses default CloudFront domain
+
+### Production
+
+- Requires manual approval via GitHub issue comment
+- Uses custom domains (zagozdakonrad.com, konradzagozda.com)
+- Issue auto-closes after 72h if not approved
+
+Both environments follow the same deployment steps:
 
 - Provisions infrastructure using Terraform
 - Builds the React application
 - Deploys built assets to S3
-- Creates CloudFront cache invalidation to ensure latest content delivery
-
-No manual deployment steps are required - simply push your changes to the main branch and GitHub Actions handles the rest.
+- Creates CloudFront cache invalidation
 
 ## Local Development
 
