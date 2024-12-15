@@ -24,18 +24,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           mask-aws-account-id: true
 
-      - name: Install dependencies
-        working-directory: frontend
-        run: yarn install
-
-      - name: Build
-        working-directory: frontend
-        run: yarn build
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.0"
+
+      - name: Install Terragrunt
+        run: |
+          TERRAGRUNT_VERSION=v0.69.13
+          wget -O terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_linux_amd64
+          chmod +x terragrunt
+          sudo mv terragrunt /usr/local/bin/terragrunt
 
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
@@ -48,30 +47,26 @@ jobs:
         
       - name: Run TFLint
         working-directory: tf
-        run: tflint -f compact
+        run: tflint -f compact --recursive
 
-      - name: Terraform Format Check
-        working-directory: tf
-        run: terraform fmt -check
+      - name: Terragrunt Format Check
+        working-directory: tf/environments/prod
+        run: terragrunt hclfmt --terragrunt-check
 
-      - name: Terraform Init
-        working-directory: tf
-        run: terraform init
+      - name: Terragrunt Validate
+        working-directory: tf/environments/prod
+        run: terragrunt validate
 
-      - name: Terraform Validate
-        working-directory: tf
-        run: terraform validate
-
-      - name: Terraform Plan
-        working-directory: tf
-        run: terraform plan -out=tfplan
+      - name: Terragrunt Plan
+        working-directory: tf/environments/prod
+        run: terragrunt plan -out=tfplan
       
-      - name: Terraform Apply
-        working-directory: tf
-        run: terraform apply tfplan
+      # - name: Terragrunt Apply
+      #   working-directory: tf/environments/prod
+      #   run: terragrunt apply tfplan
 
-      - name: Deploy to S3
-        working-directory: tf
-        run: |
-          aws s3 sync ../frontend/dist/ s3://$(terraform output -raw website_bucket_name)
-          aws cloudfront create-invalidation --distribution-id $(terraform output -raw cloudfront_distribution_id) --paths "/*"
+      # - name: Deploy to S3
+      #   working-directory: tf/environments/prod
+      #   run: |
+      #     aws s3 sync ../../frontend/dist/ s3://$(terragrunt output -raw website_bucket_name)
+      #     aws cloudfront create-invalidation --distribution-id $(terragrunt output -raw cloudfront_distribution_id) --paths "/*"

@@ -3,6 +3,7 @@
 terraform.tfstate
 terraform.tfstate.backup
 backend.tf 
+.terragrunt-cache
 
 # NPM
 package-lock.json 
