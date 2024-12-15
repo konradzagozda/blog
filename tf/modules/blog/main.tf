@@ -110,9 +110,10 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.cert.arn
-    ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2021"
+    acm_certificate_arn      = var.domain_name != null ? aws_acm_certificate.cert[0].arn : null
+    ssl_support_method       = var.domain_name != null ? "sni-only" : null
+    minimum_protocol_version = var.domain_name != null ? "TLSv1.2_2021" : "TLSv1"
+    cloudfront_default_certificate = var.domain_name == null
   }
 
   custom_error_response {
@@ -239,9 +240,10 @@ resource "aws_cloudfront_distribution" "redirect_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.cert.arn
-    ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2021"
+    acm_certificate_arn      = var.domain_name != null ? aws_acm_certificate.cert[0].arn : null
+    ssl_support_method       = var.domain_name != null ? "sni-only" : null
+    minimum_protocol_version = var.domain_name != null ? "TLSv1.2_2021" : "TLSv1"
+    cloudfront_default_certificate = var.domain_name == null
   }
 
   aliases = [each.value, "www.${each.value}"]

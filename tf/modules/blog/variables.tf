@@ -6,6 +6,7 @@ variable "website_bucket_name" {
 variable "domain_name" {
   description = "Primary domain name"
   type        = string
+  default     = null
 }
 
 variable "alternate_domain_names" {
