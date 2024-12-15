@@ -1,30 +1,12 @@
 terraform {
   required_version = ">= 1.9.0"
 
-  backend "s3" {
-    bucket         = "konradzagozda-terraform-state"
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "konradzagozda-terraform-lock"
-    encrypt        = true
-  }
+  backend "s3" {}
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-
-  default_tags {
-    tags = {
-      Environment = "Production"
-      Project     = "Personal Website"
-      Terraform   = "true"
     }
   }
 }
@@ -122,7 +104,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     response_page_path = "/index.html"
   }
 
-  aliases = concat([var.domain_name], ["www.${var.domain_name}"])
+  aliases = var.domain_name != null ? concat([var.domain_name], ["www.${var.domain_name}"]) : []
 }
 
 # CloudFront Origin Access Control
@@ -151,7 +133,7 @@ resource "aws_s3_bucket_cors_configuration" "website_bucket" {
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["GET", "HEAD"]
-    allowed_origins = ["https://${var.domain_name}"]
+    allowed_origins = [var.domain_name != null ? "https://${var.domain_name}" : "*"]
     max_age_seconds = 3600
   }
 }

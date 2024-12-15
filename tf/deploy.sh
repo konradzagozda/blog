@@ -18,7 +18,7 @@ fi
 cd environments/$ENVIRONMENT
 
 # Sync the build folder with S3
-aws s3 sync ../../frontend/dist/ s3://$(terragrunt output -raw website_bucket_name)
+aws s3 sync ../../../frontend/dist/ s3://$(terragrunt output -raw website_bucket_name)
 
 # Invalidate CloudFront cache
 aws cloudfront create-invalidation --distribution-id $(terragrunt output -raw cloudfront_distribution_id) --paths "/*"

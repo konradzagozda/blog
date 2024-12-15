@@ -16,14 +16,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          mask-aws-account-id: true
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -53,20 +45,59 @@ jobs:
         working-directory: tf/environments/prod
         run: terragrunt hclfmt --terragrunt-check
 
-      - name: Terragrunt Validate
+      - name: Terragrunt Validate Prod
         working-directory: tf/environments/prod
         run: terragrunt validate
 
-      - name: Terragrunt Plan
+      - name: Terragrunt Validate Stg
+        working-directory: tf/environments/stg
+        run: terragrunt validate
+
+      - name: Build Frontend
+        working-directory: tf
+        run: ./build.sh 
+
+      # STAGING DEPLOYMENT
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.STG_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.STG_AWS_SECRET_ACCESS_KEY }}
+          mask-aws-account-id: true
+
+      - name: Terragrunt Plan Stg
+        working-directory: tf/environments/stg
+        run: terragrunt plan -out=tfplan
+
+      - name: Terragrunt Apply Stg
+        working-directory: tf/environments/stg
+        run: terragrunt apply tfplan
+
+      - name: Deploy Stg
+        working-directory: tf
+        run: ./deploy.sh stg
+      
+      # PRODUCTION DEPLOYMENT
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          mask-aws-account-id: true
+
+      - name: Terragrunt Plan Prod
         working-directory: tf/environments/prod
         run: terragrunt plan -out=tfplan
       
-      # - name: Terragrunt Apply
+      # - name: Terragrunt Apply Prod
       #   working-directory: tf/environments/prod
       #   run: terragrunt apply tfplan
 
-      # - name: Deploy to S3
-      #   working-directory: tf/environments/prod
-      #   run: |
-      #     aws s3 sync ../../frontend/dist/ s3://$(terragrunt output -raw website_bucket_name)
-      #     aws cloudfront create-invalidation --distribution-id $(terragrunt output -raw cloudfront_distribution_id) --paths "/*"
+      # - name: Deploy Prod
+      #   working-directory: tf
+      #   run: ./deploy.sh prod
+

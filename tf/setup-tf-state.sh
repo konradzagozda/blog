@@ -2,8 +2,9 @@
 set -e
 
 # Set environment variables
-export TF_STATE_BUCKET="konradzagozda-terraform-state"
-export TF_LOCK_TABLE="konradzagozda-terraform-lock"
+export AWS_PAGER=""
+export TF_STATE_BUCKET="konradzagozda-terraform-state-staging"
+export TF_LOCK_TABLE="konradzagozda-terraform-lock-staging"
 export AWS_REGION="us-east-1"
 
 # Check if bucket already exists
