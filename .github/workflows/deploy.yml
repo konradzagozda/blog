@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
 
-# Add concurrency to ensure sequential execution
+# Add concurrency to ensure sequential execution test
 concurrency: 
   group: ${{ github.workflow }}
   cancel-in-progress: false
