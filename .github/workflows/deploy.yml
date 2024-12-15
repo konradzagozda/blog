@@ -91,11 +91,11 @@ jobs:
         working-directory: tf/environments/prod
         run: terragrunt plan -out=tfplan --terragrunt-non-interactive
       
-      # - name: PRODUCTION - Terragrunt Apply
-      #   working-directory: tf/environments/prod
-      #   run: terragrunt apply tfplan --terragrunt-non-interactive
+      - name: PRODUCTION - Terragrunt Apply
+        working-directory: tf/environments/prod
+        run: terragrunt apply tfplan --terragrunt-non-interactive
 
-      # - name: PRODUCTION - Deploy
-      #   working-directory: tf
-      #   run: ./deploy.sh prod
+      - name: PRODUCTION - Deploy
+        working-directory: tf
+        run: ./deploy.sh prod
 
