@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+# Add concurrency to ensure sequential execution
+concurrency: 
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
