@@ -53,10 +53,6 @@ jobs:
         working-directory: tf/environments/prod
         run: terragrunt hclfmt --terragrunt-check --terragrunt-non-interactive
 
-      - name: Build Frontend
-        working-directory: tf
-        run: ./build.sh 
-
       # STAGING DEPLOYMENT
 
       - name: STAGING - Configure AWS Credentials
@@ -77,6 +73,10 @@ jobs:
       - name: STAGING - Terragrunt Apply
         working-directory: tf/environments/stg
         run: terragrunt apply tfplan --terragrunt-non-interactive
+
+      - name: STAGING - Build Frontend
+        working-directory: tf
+        run: ./build.sh stg
 
       - name: STAGING - Deploy
         working-directory: tf
@@ -117,8 +117,11 @@ jobs:
       - name: PRODUCTION - Terragrunt Apply
         working-directory: tf/environments/prod
         run: terragrunt apply tfplan --terragrunt-non-interactive
+      
+      - name: PRODUCTION - Build Frontend
+        working-directory: tf
+        run: ./build.sh prod
 
       - name: PRODUCTION - Deploy
         working-directory: tf
         run: ./deploy.sh prod
-
