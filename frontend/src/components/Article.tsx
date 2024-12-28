@@ -8,6 +8,7 @@ import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
 import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
 import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { type ArticleItem } from "../App";
 
@@ -71,6 +72,7 @@ export function Article({ article }: ArticleProps): ReactElement {
         <Box sx={{ px: { xs: 0, md: 0 } }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
             components={{
               h1: ({ children }) => (
                 <Typography
@@ -131,6 +133,20 @@ export function Article({ article }: ArticleProps): ReactElement {
                 >
                   {children}
                 </Typography>
+              ),
+              iframe: (props) => (
+                <Box sx={{ my: 4, width: "100%" }}>
+                  <iframe
+                    {...props}
+                    style={{
+                      border: "none",
+                      width: "100%",
+                      minHeight: "500px",
+                      borderRadius: "8px",
+                      backgroundColor: "rgba(0, 0, 0, 0.03)",
+                    }}
+                  />
+                </Box>
               ),
               code: function Code(
                 props: ComponentPropsWithoutRef<"code"> & { inline?: boolean }
