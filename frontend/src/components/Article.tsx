@@ -134,6 +134,11 @@ export function Article({ article }: ArticleProps): ReactElement {
                   {children}
                 </Typography>
               ),
+              p: ({ children }) => (
+                <Typography paragraph sx={{ mb: 3 }}>
+                  {children}
+                </Typography>
+              ),
               ul: ({ children }) => (
                 <Box component="ul" sx={{ pl: { xs: 4, md: 4 }, my: 2 }}>
                   {children}
