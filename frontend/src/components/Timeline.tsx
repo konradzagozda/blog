@@ -100,14 +100,16 @@ export function Timeline({ items }: TimelineProps): ReactElement {
   };
 
   return (
-    <>
-      {/* Desktop/Tablet Timeline */}
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      {/* Tablet/Desktop Timeline */}
       <MuiTimeline
         position="right"
         sx={{
-          maxWidth: "1000px",
-          margin: "0 auto",
+          maxWidth: { sm: "1000px", md: "1000px", lg: "1000px" },
+          margin: "0",
+          marginLeft: "0",
           display: { xs: "none", sm: "block" },
+          width: "100%",
         }}
       >
         {items.map((item, index) => (
@@ -117,6 +119,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
               ...getItemSx(item),
               minHeight: "100px",
               "&::before": {
+                flex: 0.15,
                 padding: "6px 16px",
               },
             }}
@@ -127,8 +130,9 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 padding: "6px 16px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: index % 2 === 0 ? "flex-end" : "flex-start",
+                justifyContent: "flex-start",
                 margin: 0,
+                flex: 0.15,
               }}
               variant="body2"
               color="text.secondary"
@@ -158,7 +162,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                 justifyContent: "center",
                 margin: 0,
                 minWidth: 0,
-                flex: 1,
+                flex: 0.85,
               }}
             >
               <Typography
@@ -190,9 +194,11 @@ export function Timeline({ items }: TimelineProps): ReactElement {
         position="right"
         sx={{
           maxWidth: "1000px",
-          margin: "0 auto",
+          margin: "0",
+          marginLeft: "0",
           display: { xs: "block", sm: "none" },
           pl: 10,
+          width: "100%",
         }}
       >
         {items.map((item, index) => (
@@ -269,6 +275,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   minWidth: 0,
+                  fontSize: "1.25rem",
                 }}
               >
                 {item.title}
@@ -290,6 +297,6 @@ export function Timeline({ items }: TimelineProps): ReactElement {
           </TimelineItem>
         ))}
       </MuiTimeline>
-    </>
+    </div>
   );
 }

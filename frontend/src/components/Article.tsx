@@ -193,7 +193,20 @@ export function Article({ article }: ArticleProps): ReactElement {
                     </SyntaxHighlighter>
                   );
                 }
-                return <code className={className}>{children}</code>;
+                return (
+                  // @ts-expect-error - known issue with SyntaxHighlighter types
+                  <SyntaxHighlighter
+                    style={oneDark}
+                    PreTag="span"
+                    customStyle={{
+                      padding: "0.1em 0.2em",
+                      borderRadius: "6px",
+                      fontFamily: CODE_FONTS,
+                    }}
+                  >
+                    {String(children)}
+                  </SyntaxHighlighter>
+                );
               },
             }}
           >
