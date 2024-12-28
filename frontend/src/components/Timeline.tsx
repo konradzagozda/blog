@@ -103,7 +103,7 @@ export function Timeline({ items }: TimelineProps): ReactElement {
     <>
       {/* Desktop/Tablet Timeline */}
       <MuiTimeline
-        position="alternate"
+        position="right"
         sx={{
           maxWidth: "1000px",
           margin: "0 auto",

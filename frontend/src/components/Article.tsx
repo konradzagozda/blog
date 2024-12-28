@@ -77,7 +77,7 @@ export function Article({ article }: ArticleProps): ReactElement {
                   variant="h2"
                   component="h2"
                   gutterBottom
-                  sx={{ mt: 4 }}
+                  sx={{ mt: 6, mb: 2 }}
                 >
                   {children}
                 </Typography>
@@ -87,7 +87,7 @@ export function Article({ article }: ArticleProps): ReactElement {
                   variant="h3"
                   component="h3"
                   gutterBottom
-                  sx={{ mt: 3.5 }}
+                  sx={{ mt: 5, mb: 2 }}
                 >
                   {children}
                 </Typography>
@@ -97,23 +97,38 @@ export function Article({ article }: ArticleProps): ReactElement {
                   variant="h4"
                   component="h4"
                   gutterBottom
-                  sx={{ mt: 3 }}
+                  sx={{ mt: 4, mb: 2 }}
                 >
                   {children}
                 </Typography>
               ),
               h4: ({ children }) => (
-                <Typography variant="h5" component="h5" gutterBottom>
+                <Typography
+                  variant="h5"
+                  component="h5"
+                  gutterBottom
+                  sx={{ mt: 3, mb: 2 }}
+                >
                   {children}
                 </Typography>
               ),
               h5: ({ children }) => (
-                <Typography variant="h6" component="h6" gutterBottom>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  gutterBottom
+                  sx={{ mt: 2.5, mb: 2 }}
+                >
                   {children}
                 </Typography>
               ),
               h6: ({ children }) => (
-                <Typography variant="h6" component="h6" gutterBottom>
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  gutterBottom
+                  sx={{ mt: 2, mb: 2 }}
+                >
                   {children}
                 </Typography>
               ),
@@ -135,7 +150,7 @@ export function Article({ article }: ArticleProps): ReactElement {
                         margin: "1.5em 0",
                         borderRadius: "8px",
                         fontFamily: CODE_FONTS,
-                        padding: "1em 0.75em"
+                        padding: "1em 0.75em",
                       }}
                       codeTagProps={{
                         style: {
