@@ -154,6 +154,70 @@ export function Article({ article }: ArticleProps): ReactElement {
                   {children}
                 </Box>
               ),
+              table: ({ children }) => (
+                <Box
+                  sx={{
+                    width: "100%",
+                    overflowX: "auto",
+                    my: 3,
+                    maxHeight: "calc((16px * 2 + 24px * 10) * 2.5)",
+                    overflowY: "auto",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "8px",
+                    border: "1px solid rgba(224, 224, 224, 1)",
+                    boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+                    "& table": {
+                      width: "100%",
+                      borderCollapse: "collapse",
+                      borderSpacing: 0,
+                      tableLayout: "fixed",
+                    },
+                    "& thead": {
+                      position: "sticky",
+                      top: 0,
+                      backgroundColor: "#ffffff",
+                      zIndex: 1,
+                    },
+                  }}
+                >
+                  <table>{children}</table>
+                </Box>
+              ),
+              thead: ({ children }) => (
+                <thead
+                  style={{ borderBottom: "2px solid rgba(224, 224, 224, 1)" }}
+                >
+                  {children}
+                </thead>
+              ),
+              tr: ({ children }) => (
+                <tr
+                  style={{ borderBottom: "1px solid rgba(224, 224, 224, 0.5)" }}
+                >
+                  {children}
+                </tr>
+              ),
+              th: ({ children }) => (
+                <th
+                  style={{
+                    padding: "16px",
+                    textAlign: "left",
+                    fontWeight: 600,
+                  }}
+                >
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td
+                  style={{
+                    padding: "16px",
+                    textAlign: "left",
+                  }}
+                >
+                  {children}
+                </td>
+              ),
               iframe: (props) => (
                 <Box sx={{ my: 4, width: "100%" }}>
                   <iframe
