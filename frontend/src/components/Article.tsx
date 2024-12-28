@@ -134,6 +134,21 @@ export function Article({ article }: ArticleProps): ReactElement {
                   {children}
                 </Typography>
               ),
+              ul: ({ children }) => (
+                <Box component="ul" sx={{ pl: { xs: 4, md: 4 }, my: 2 }}>
+                  {children}
+                </Box>
+              ),
+              ol: ({ children }) => (
+                <Box component="ol" sx={{ pl: { xs: 4, md: 4 }, my: 2 }}>
+                  {children}
+                </Box>
+              ),
+              li: ({ children }) => (
+                <Box component="li" sx={{ pl: 0.5, my: 0.5 }}>
+                  {children}
+                </Box>
+              ),
               iframe: (props) => (
                 <Box sx={{ my: 4, width: "100%" }}>
                   <iframe
